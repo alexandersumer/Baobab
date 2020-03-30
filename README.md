@@ -1,4 +1,4 @@
-##Description:
+## Description:
 
 Baobab is a planning tool that allows users to create a tree structure of queues containing nested trees or kanban boards, allowing users the flexibility between a big picture view and a detailed view of their work to strike a balance between sequentiality and asychrony to reach their full potential.
 
@@ -6,7 +6,7 @@ Baobab is a planning tool that allows users to create a tree structure of queues
 
 The webapp is developed using React.js for frontend and firebase for the backend.
 
-##Website:
+## Website:
 
 You can visit the website here: https://baobab-82803.firebaseapp.com/
 
@@ -14,15 +14,15 @@ You can visit the website here: https://baobab-82803.firebaseapp.com/
 
 ![](/frontend/src/img/landing-demo.png)
 
-##Tree:
+## Tree view:
 
 ![](/frontend/src/img/tree-demo.png)
 
-##Kanban:
+## Kanban view:
 
 ![](/frontend/src/img/kanban-demo.png)
 
-##Local development:
+## Local development:
 
 - `cd frontend`
 - `npm install`
