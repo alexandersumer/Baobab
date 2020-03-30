@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@atlaskit/inline-edit": "^10.0.30",
     "@atlaskit/modal-dialog": "^10.5.4",

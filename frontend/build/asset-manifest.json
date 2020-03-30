@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b15c56df.chunk.css",
+    "main.js": "/static/js/main.683ba9b6.chunk.js",
+    "main.js.map": "/static/js/main.683ba9b6.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.9957dbbd.js",
+    "runtime-main.js.map": "/static/js/runtime-main.9957dbbd.js.map",
+    "static/css/2.051905ae.chunk.css": "/static/css/2.051905ae.chunk.css",
+    "static/js/2.0b194eb3.chunk.js": "/static/js/2.0b194eb3.chunk.js",
+    "static/js/2.0b194eb3.chunk.js.map": "/static/js/2.0b194eb3.chunk.js.map",
+    "static/js/3.123e964b.chunk.js": "/static/js/3.123e964b.chunk.js",
+    "static/js/3.123e964b.chunk.js.map": "/static/js/3.123e964b.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.957e1a25367691c4cf2ba453ff44d960.js": "/precache-manifest.957e1a25367691c4cf2ba453ff44d960.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.051905ae.chunk.css.map": "/static/css/2.051905ae.chunk.css.map",
+    "static/css/main.b15c56df.chunk.css.map": "/static/css/main.b15c56df.chunk.css.map",
+    "static/js/2.0b194eb3.chunk.js.LICENSE.txt": "/static/js/2.0b194eb3.chunk.js.LICENSE.txt",
+    "static/js/3.123e964b.chunk.js.LICENSE.txt": "/static/js/3.123e964b.chunk.js.LICENSE.txt",
+    "static/media/baobab-tree.svg": "/static/media/baobab-tree.e2e9175f.svg",
+    "static/media/Landing.css": "/static/media/camille_pissarro_gelee_blanche.2a4c1f02.jpg",
+    "static/media/Header.css": "/static/media/header.6b8584ac.jpg",
+    "static/media/kanban-cancel.5ae6a1b9.svg": "/static/media/kanban-cancel.5ae6a1b9.svg",
+    "static/media/kanban-ok.d5ae0f6f.svg": "/static/media/kanban-ok.d5ae0f6f.svg",
+    "static/media/kanban.svg": "/static/media/kanban.6dffd1fe.svg",
+    "static/media/landing-icon-1.svg": "/static/media/landing-icon-1.6101a30c.svg",
+    "static/media/landing-icon-2.svg": "/static/media/landing-icon-2.e2e9175f.svg",
+    "static/media/landing-icon-3.svg": "/static/media/landing-icon-3.df044be2.svg",
+    "static/media/logo.svg": "/static/media/logo.2f449510.svg",
+    "static/media/logo.png": "/static/media/logo.c3eeb56a.png",
+    "static/media/modal-delete.44add23f.svg": "/static/media/modal-delete.44add23f.svg",
+    "static/media/project-active-icon.svg": "/static/media/project-active-icon.1bd44b9d.svg",
+    "static/media/queue.svg": "/static/media/queue.7d7d5b38.svg",
+    "static/media/tree.svg": "/static/media/tree.0b0f800d.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9957dbbd.js",
+    "static/css/2.051905ae.chunk.css",
+    "static/js/2.0b194eb3.chunk.js",
+    "static/css/main.b15c56df.chunk.css",
+    "static/js/main.683ba9b6.chunk.js"
+  ]
+}

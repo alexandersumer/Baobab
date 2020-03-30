@@ -1,7 +1,7 @@
-import {Button, Modal} from 'antd';
+import { Button, Modal } from 'antd';
 import QueueAnim from 'rc-queue-anim';
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import './Landing.css';
 import SignIn from "../auth/SignIn";
@@ -51,17 +51,55 @@ class Landing extends Component {
         <div className='banner'>
           <div className='banner-text'>
             <QueueAnim type='bottom' delay={150}>
-              <h1 key='h1'>Plan your life.</h1>
-              <br/>
-              <p key='p'>Create trees, queues, kanbans and chat to the tree now.</p>
+              <h1>Plan your journey.</h1>
+              <br />
             </QueueAnim>
           </div>
-          <div></div>
-          <div></div>
         </div>
         <div className='page-1'>
           <div className='page-1-heading'>
-            <h1>The ultimate planning platform</h1>
+            <h1>Create trees, queues, kanbans and chat to the tree now.</h1>
+          </div>
+          <div className='page-1-boxes'>
+            <div className='page-1-box'>
+              <img
+                alt='engagement illustration'
+                src={require('../img/tree.svg')}
+              />
+              <h2>Create trees</h2>
+              <p>Trees allow you to structure your concurrent goals hierarchically and provide a big picture view.</p>
+            </div>
+            <div className='page-1-box'>
+              <img
+                alt='open communication illustration'
+                src={require('../img/queue.svg')}
+              />
+              <h2>Create queues</h2>
+              <p>Queues allow you to organise your gials sequentiality in priority order to maximise efficiency.</p>
+            </div>
+            <div className='page-1-box'>
+              <img
+                alt='live feedback illustration'
+                src={require('../img/kanban.svg')}
+              />
+              <h2>Create kanban boards</h2>
+              <p>Kanbans allow you to be in control and get the day-to-day execution of workitems done.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </div>
+        <div className='page-1'>
+          <div className='page-1-heading'>
+            <h1>The ultimate planning platform.</h1>
             <p>Get the best of both worlds: a big picture tree view for long term planning and a detailed kanban view for the day to day execution of tasks.</p>
           </div>
           <div className='page-1-boxes'>
@@ -90,6 +128,16 @@ class Landing extends Component {
               <p>Get crucial tips and tricks from the talking tree to cultivate your full potential.</p>
             </div>
           </div>
+        </div>
+        <div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </div>
       </div>
     )
