@@ -1,0 +1,50 @@
+@import '~antd/dist/antd.css';
+
+.halfWidthContainer {
+  margin: auto;
+  width: 50%;
+  padding: 20px;
+  padding-right: 30px;
+  text-align: left;
+}
+
+.parentContainer {
+  background-color: #F5F5F5;
+  min-height: calc(100vh - 100px);
+}
+
+h2 {
+  display: inline-block;
+}
+
+.no-projects {
+  margin-bottom: 50px;
+  color: #cacacb;
+}
+
+.project-form .ant-time-picker-icon {
+  right: -210px;
+}
+
+.project-form .ant-form-item-children input {
+  height: 40px;
+  font-size: 15px;
+}
+
+@media screen and (max-width: 767px) {
+  .halfWidthContainer {
+    width: 100%;
+  }
+
+  .buttonBar {
+    height: 60px;
+  }
+
+  .project-form .ant-time-picker-icon {
+    right: -110px;
+  }
+
+  .project-form .ant-form-item-control-wrapper input {
+    width: 250px;
+  }
+}

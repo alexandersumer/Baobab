@@ -1,0 +1,69 @@
+.header-wrap {
+  align-items: center;
+  height: 100px;
+  justify-content: space-around;
+  background-image: url("../img/header.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+}
+
+.logo img {
+  height: 65px;
+}
+
+.rhs-buttons {
+  color: black;
+  display: inline-flex;
+}
+
+.rhs-buttons button {
+  color: black;
+  margin-right: 50px;
+}
+
+.rhs-buttons button:hover {
+  color: #59d08f;
+}
+
+.logged-in {
+  color: black;
+  align-self: center;
+}
+
+.logged-in a {
+  color: black;
+  font-size: 16px;
+}
+
+.logged-in i {
+  color: black;
+  padding: 0 6px;
+}
+
+.ant-modal-body {
+  color: black;
+  padding: 20px 55px 40px 55px;
+  margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 767px) {
+  .logo img {
+    color: black;
+    height: 30px;
+  }
+
+  .rhs-buttons button {
+    color: black;
+    margin-right: 10px;
+  }
+
+  .tag-block {
+    color: black;
+    display: none;
+  }
+  .ant-modal-body {
+    color: black;
+    padding: 20px 20px 40px 20px;
+  }
+}
