@@ -1,0 +1,42 @@
+.progIcon {
+    height: 32px;
+    width: 32px;
+    margin: 10px;
+}
+
+.progText {
+    margin-bottom: 0px;
+}
+
+.progWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.progContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+* {box-sizing:border-box}
+
+/* Container for skill bars */
+.progBarContainer {
+  width: 100%; /* Full width */
+  background-color: #ddd; /* Grey background */
+  margin-top: 10px;
+}
+
+.progBar {
+  text-align: right; /* Right-align text */
+  padding-top: 10px; /* Add top padding */
+  padding-bottom: 10px; /* Add bottom padding */
+  padding-right: 10px;
+  color: white; /* White text color */
+}
+
+.progBarDone {background-color: rgb(89, 208, 143);} /* Green */
+
+.centreItems {
+    text-align: center;
+}

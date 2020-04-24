@@ -1,41 +1,59 @@
 import React from "react";
-import {
-  Board,
-  BoardContainer
-} from ".";
+import { Board, BoardContainer } from ".";
 import Lane from "./Lane";
-import { queueWidth } from "./Constants";
+import { queueWidth, kanbanType, nestedTree } from "./Constants";
 import { QueueFooter } from "./QueueFooter";
 import { useHistory } from "react-router-dom";
 import { KANBAN, TREE } from "../constants/routes";
+import firebase from "../firebase";
+import { v4 as uuidv4 } from "uuid";
+import { message } from "antd";
 
 function QueueKanbanInner(props) {
-  const { columns, onColumnChange, withScrollableColumns } = props;
+  const {
+    columns,
+    onColumnChange,
+    withScrollableColumns,
+    parentID,
+    treeID,
+    loading
+  } = props;
+
   const history = useHistory();
 
-  const getNewCardStub = (task, type) => {
-    var sum = "";
-    columns.QueueItems.map((val) => {
-      sum = sum + val.id;
-      return sum;
-    });
-
-    return {
-      id: sum,
-      title: task,
-      type: type
-    };
-  };
-
   const addNewTask = (task, type) => {
-    const newData = getNewCardStub(task, type);
-    let newColumns = {
-      QueueItems: [...columns["QueueItems"], newData]
+    var node = {
+      id: uuidv4(),
+      title: task,
+      type: type,
+      queueID: parentID,
+      tree: treeID
     };
-    onColumnChange(newColumns);
+
+    let newColumns = {
+      QueueItems: [...columns["QueueItems"], node]
+    };
+
+    const key = "mkey";
+    message.loading({ content: "Creating...", key });
+
+    firebase
+      .getFunctionsInstance()
+      .httpsCallable("CreateQueueItem")(node)
+      .then(() => {
+        onColumnChange(newColumns, true);
+        message.success({ content: "Created!", key, duration: 0.5 });
+        console.log("Success");
+      })
+      .catch(error => {
+        console.error(error);
+        console.log("Not success :( ");
+        message.error("Couldn't create queue item: " + error.mesage);
+        props.reload();
+      });
   };
 
-  const onCardClick = (id) => {
+  const onCardClick = id => {
     const clickedCard = columns.QueueItems.find(element => element.id === id);
     if (!clickedCard) {
       return;
@@ -43,22 +61,26 @@ function QueueKanbanInner(props) {
 
     var currentHistoryState = history.location.state;
     var currentStack = [];
-    if (currentHistoryState) {
+    if (currentHistoryState && currentHistoryState.stack) {
       currentStack = currentHistoryState.stack;
+    } else {
+      currentHistoryState = {};
     }
 
     currentStack.push(clickedCard.title);
+    currentHistoryState.stack = currentStack;
 
-    if (clickedCard.type === "kanban") {
-      history.push(KANBAN + "/" + id, { stack: currentStack });
-    } else if (clickedCard.type === "nestedTree") {
-      history.push(TREE + "/" + id, { stack: currentStack });
+    if (clickedCard.type === kanbanType) {
+      history.push(KANBAN + "/" + id, currentHistoryState);
+    } else if (clickedCard.type === nestedTree) {
+      history.push(TREE + "/" + id, currentHistoryState);
     }
   };
 
   return (
-    <BoardContainer>
+    <BoardContainer style={{ minHeight: "max-content" }}>
       <Lane
+        loading={loading}
         style={{ width: queueWidth }}
         key={"QueueItems"}
         listId={"QueueItems"}

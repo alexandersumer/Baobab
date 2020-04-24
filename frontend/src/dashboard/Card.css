@@ -49,7 +49,7 @@ a {
   margin: 5px 0;
 }
 
-.project-title {
+.tree-title {
   display: flex;
   align-items: center;
 }
@@ -86,7 +86,7 @@ a {
     padding: 5px 0 5px 20px;
   }
 
-  .card .project-title {
+  .card .tree-title {
     font-size: 12px;
   }
 

@@ -1,120 +1,156 @@
-import app from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
-import 'firebase/functions';
-import firebase from 'firebase';
-import * as firebaseui from 'firebaseui';
-import { message } from 'antd';
+import app from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import "firebase/functions";
+import firebase from "firebase";
+import * as firebaseui from "firebaseui";
+import { message } from "antd";
 
 const firebaseConfig = {
-	apiKey: "AIzaSyDPycHenv2ptI8SCfkak_5wlJoje0JNbRM",
-	authDomain: "baobab-82803.firebaseapp.com",
-	databaseURL: "https://baobab-82803.firebaseio.com",
-	projectId: "baobab-82803",
-	storageBucket: "baobab-82803.appspot.com",
-	messagingSenderId: "398776449818",
-	appId: "1:398776449818:web:a2c72c80432d0e0d9c0aa3",
-	measurementId: "G-7WDBS302GC"
+  apiKey: "AIzaSyDPycHenv2ptI8SCfkak_5wlJoje0JNbRM",
+  authDomain: "baobab-82803.firebaseapp.com",
+  databaseURL: "https://baobab-82803.firebaseio.com",
+  projectId: "baobab-82803",
+  storageBucket: "baobab-82803.appspot.com",
+  messagingSenderId: "398776449818",
+  appId: "1:398776449818:web:a2c72c80432d0e0d9c0aa3",
+  measurementId: "G-7WDBS302GC"
 };
 
 class Firebase {
-	constructor() {
-		this.functions = app.initializeApp(firebaseConfig).functions('asia-northeast1');
-		this.auth = app.auth();
-		this.setAuthReadyPromise_();
-		this.authUI = new firebaseui.auth.AuthUI(this.auth);
+  constructor() {
+    this.functions = app
+      .initializeApp(firebaseConfig)
+      .functions("asia-northeast1");
+    this.auth = app.auth();
+    this.setAuthReadyPromise_();
+    this.authUI = new firebaseui.auth.AuthUI(this.auth);
 
-		try {
-			this.messaging = firebase.messaging();
-			this.messaging.usePublicVapidKey('BNBR7rJpSKHf19wnTfpuNdQPfdsjMuGKDz18fbmKxdKkfik-YCcv3Np97ZlMKKTvjrPl9hgb0qQecrRuXei8cLU');
-			this.messagingToken = null;
-		} catch {
-			this.messaging = null;
-		}
-	}
+    try {
+      this.messaging = firebase.messaging();
+      this.messaging.usePublicVapidKey(
+        "BNBR7rJpSKHf19wnTfpuNdQPfdsjMuGKDz18fbmKxdKkfik-YCcv3Np97ZlMKKTvjrPl9hgb0qQecrRuXei8cLU"
+      );
+      this.messagingToken = null;
+    } catch {
+      this.messaging = null;
+    }
 
-	setAuthReadyPromise_() {
-		this.authReady = new Promise((resolve, reject) => {
-			this.setSignInOnAuthReady_(resolve);
-		});
-	}
+    // // MAKE SURE TO CHANGE THE BELOW TO WHEREVER YOUR CLOUD FUNCTIONS ARE HOSTED
+    // if (window.location.hostname === "localhost") {
+    //   this.functions.useFunctionsEmulator("http://localhost:5001");
+    // }
+  }
 
-	setSignInOnAuthReady_(onReady) {
-		const unsubscribe = this.auth.onAuthStateChanged(user => {
-			unsubscribe();
-			if (!user) this.doSignInAnonymously().then((credential) => onReady(credential.user));
-			else onReady(user);
-		});
-	}
+  setAuthReadyPromise_() {
+    this.authReady = new Promise((resolve, reject) => {
+      this.setSignInOnAuthReady_(resolve);
+    });
+  }
 
-	doSignInAnonymously() { return this.auth.signInAnonymously(); }
+  setSignInOnAuthReady_(onReady) {
+    const unsubscribe = this.auth.onAuthStateChanged(user => {
+      unsubscribe();
+      if (!user)
+        this.doSignInAnonymously().then(credential => onReady(credential.user));
+      else onReady(user);
+    });
+  }
 
-	doSignInWithCredential(credential) { return this.auth.signInWithCredential(credential); }
+  doSignInAnonymously() {
+    return this.auth.signInAnonymously();
+  }
 
-	doSignOut() { this.auth.signOut(); }
+  doSignInWithCredential(credential) {
+    return this.auth.signInWithCredential(credential);
+  }
 
-	doPasswordUpdate(password) { this.auth.currentUser.updatePassword(password); }
+  doSignOut() {
+    this.auth.signOut();
+  }
 
-	getCurrentUser() { return this.auth.currentUser; }
+  doPasswordUpdate(password) {
+    this.auth.currentUser.updatePassword(password);
+  }
 
-	getDisplayName() {
-		if (!this.isAuthenticated() || this.isAnonymouslyAuthenticated()) return 'Anonymous';
-		return this.auth.currentUser.displayName || this.auth.currentUser.providerData[0].displayName;
-	}
+  getCurrentUser() {
+    return this.auth.currentUser;
+  }
 
-	getAvatar() {
-		if (!this.isAuthenticated() || this.isAnonymouslyAuthenticated()) return null;
-		return this.auth.currentUser.photoURL || this.auth.currentUser.providerData[0].photoURL;
-	}
+  getDisplayName() {
+    if (!this.isAuthenticated() || this.isAnonymouslyAuthenticated())
+      return "Anonymous";
+    return (
+      this.auth.currentUser.displayName ||
+      this.auth.currentUser.providerData[0].displayName
+    );
+  }
 
-	getFirestoreInstance() { return app.firestore(); }
+  getAvatar() {
+    if (!this.isAuthenticated() || this.isAnonymouslyAuthenticated())
+      return null;
+    return (
+      this.auth.currentUser.photoURL ||
+      this.auth.currentUser.providerData[0].photoURL
+    );
+  }
 
-	getFunctionsInstance() { return this.functions; }
+  getFirestoreInstance() {
+    return app.firestore();
+  }
 
-	getMessagingInstance() { return this.messaging; }
+  getFunctionsInstance() {
+    return this.functions;
+  }
 
-	isAuthenticated() { return !!this.auth.currentUser; }
+  getMessagingInstance() {
+    return this.messaging;
+  }
 
-	isAnonymouslyAuthenticated() {
-		if (!this.isAuthenticated()) return false;
-		return this.auth.currentUser.isAnonymous;
-	}
+  isAuthenticated() {
+    return !!this.auth.currentUser;
+  }
 
-	async monitorMessagingToken() {
-		if (this.messaging === null) return;
-		if (this.messagingToken !== null) return;
+  isAnonymouslyAuthenticated() {
+    if (!this.isAuthenticated()) return false;
+    return this.auth.currentUser.isAnonymous;
+  }
 
-		const permission = await Notification.requestPermission();
-		if (permission !== 'granted') {
-			message.error('Notification permission was not granted. You will not receive updates on newly posted questions.');
-		}
+  async monitorMessagingToken() {
+    if (this.messaging === null) return;
+    if (this.messagingToken !== null) return;
 
-		const getToken = async () => {
-			try {
-				const token = await this.messaging.getToken();
-				if (token) {
-					await this.functions.httpsCallable('StoreFCMToken')({
-						oldToken: this.messagingToken,
-						newToken: token
-					});
-					this.messagingToken = token;
-				}
-			} catch (error) {
-				console.error('FCM Token Error: ', error);
-			}
-		};
+    const permission = await Notification.requestPermission();
+    if (permission !== "granted") {
+      message.error("Notification permission was not granted.");
+    }
 
-		getToken();
-		this.messaging.onTokenRefresh(getToken);
-	}
+    const getToken = async () => {
+      try {
+        const token = await this.messaging.getToken();
+        if (token) {
+          await this.functions.httpsCallable("StoreFCMToken")({
+            oldToken: this.messagingToken,
+            newToken: token
+          });
+          this.messagingToken = token;
+        }
+      } catch (error) {
+        console.error("FCM Token Error: ", error);
+      }
+    };
 
-	whenAuthReady() {
-		return this.authReady;
-	}
+    getToken();
+    this.messaging.onTokenRefresh(getToken);
+  }
 
-	onAuthStateChanged(observer, error = undefined) {
-		return this.auth.onAuthStateChanged(observer, error);
-	}
+  whenAuthReady() {
+    return this.authReady;
+  }
+
+  onAuthStateChanged(observer, error = undefined) {
+    return this.auth.onAuthStateChanged(observer, error);
+  }
 }
 
 export default new Firebase();

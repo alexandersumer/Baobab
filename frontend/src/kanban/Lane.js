@@ -3,6 +3,8 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import { Card } from "./Card";
 import { color, grid, borderRadius } from "./Constants";
 import styled from "styled-components";
+// import loadingSpinner from "../img/board-loading.gif";
+import loadingSpinner from "../img/boring-board-loading.gif";
 
 export const getBackgroundColor = (isDraggingOver, isDraggingFrom) => {
   if (isDraggingOver) {
@@ -62,33 +64,49 @@ const getRenderedCard = (cards, onCardClick) => (
 ) => {
   const card = cards[rubric.source.index];
   return (
-    <Card
-      key={card.id}
-      data={card}
-      isDragging={dragSnapshot.isDragging}
-      provided={dragProvided}
-      draggingOver={dragSnapshot.draggingOver}
-      onCardClick={onCardClick}
-    />
+    <div>
+      <Card
+        key={card.id}
+        data={card}
+        isDragging={dragSnapshot.isDragging}
+        provided={dragProvided}
+        draggingOver={dragSnapshot.draggingOver}
+        onCardClick={onCardClick}
+      />
+    </div>
   );
 };
 
 const CardList = React.memo(function CardList(props) {
-  return props.cards.map((card, index) => (
-    <Draggable key={card.id} draggableId={card.id} index={index}>
-      {getRenderedCard(props.cards, props.onCardClick)}
-    </Draggable>
-  ));
+  if (props.loading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        <img src={loadingSpinner}></img>
+      </div>
+    );
+  } else {
+    return props.cards.map((card, index) => (
+      <Draggable key={card.id} draggableId={card.id} index={index}>
+        {getRenderedCard(props.cards, props.onCardClick)}
+      </Draggable>
+    ));
+  }
 });
 
 function CardListContainer(props) {
-  const { cards, dropProvided, header, footer, onCardClick } = props;
+  const { cards, dropProvided, header, footer, onCardClick, loading } = props;
 
   return (
     <Container>
       {header}
       <DropZone ref={dropProvided.innerRef}>
-        <CardList onCardClick={onCardClick} cards={cards} />
+        <CardList onCardClick={onCardClick} cards={cards} loading={loading} />
         {dropProvided.placeholder}
       </DropZone>
       {footer}
@@ -109,7 +127,8 @@ export default function Lane(props) {
     cards,
     header,
     footer,
-    onCardClick
+    onCardClick,
+    loading
   } = props;
 
   return (
@@ -132,6 +151,7 @@ export default function Lane(props) {
           {internalScroll ? (
             <ScrollContainer style={scrollContainerStyle}>
               <CardListContainer
+                loading={loading}
                 cards={cards}
                 dropProvided={dropProvided}
                 header={header}
@@ -141,6 +161,7 @@ export default function Lane(props) {
             </ScrollContainer>
           ) : (
             <CardListContainer
+              loading={loading}
               cards={cards}
               dropProvided={dropProvided}
               header={header}

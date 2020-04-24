@@ -1,16 +1,17 @@
 import * as React from "react";
 import MessageList from "./MessageList";
-import "./chatbotstyles.css";
 import InputField from "./InputField";
-import Header from "./Header"
+import Header from "./Header";
+
+import "./styles/window.css";
 
 class Window extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      currMessage : "",
-      messages : []
+      currMessage: "",
+      messages: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,29 +26,25 @@ class Window extends React.Component {
 
   async handleSubmit(msg) {
     this.addMessageToList(msg);
-    let replyMessages = this.props.generateReply(msg.text);
+    let replyMessages = await this.props.generateReply(msg.text);
     for (var index in replyMessages) {
-      let replyText = replyMessages[index]
-      let reply = {"isUser": false, "text": replyText};
-      await new Promise(r => setTimeout(r, 400));
+      let replyText = replyMessages[index];
+      let reply = { isUser: false, text: replyText };
       this.addMessageToList(reply);
     }
-    console.log(this.state.messages.length);
   }
 
-  render () {
+  render() {
     return (
-
-      <div className="chatbot-window">
-        <Header/>
-        <MessageList
-          messages={this.state.messages}
-        />
-        <InputField
-          handleSubmit={this.handleSubmit}
-        />
+      <div
+        className={
+          this.props.isOpen ? "chatbot-window-open" : "chatbot-window-closed"
+        }
+      >
+        <Header />
+        <MessageList messages={this.state.messages} />
+        <InputField handleSubmit={this.handleSubmit} />
       </div>
-
     );
   }
 }

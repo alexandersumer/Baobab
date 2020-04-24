@@ -1,12 +1,12 @@
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
+const functions = require("firebase-functions");
+const admin = require("firebase-admin");
 
-admin.initializeApp(functions.config().firebase)
+admin.initializeApp(functions.config().firebase);
 
 exports.getFirestoreInstance = () => {
-    return admin.firestore();
+  return admin.firestore();
 };
 
 exports.getAuthInstance = () => {
-    return admin.auth();
+  return admin.auth();
 };

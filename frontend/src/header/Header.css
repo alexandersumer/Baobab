@@ -1,29 +1,64 @@
 .header-wrap {
   align-items: center;
-  height: 100px;
+  height: 120px;
   justify-content: space-around;
-  background-image: url("../img/header.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
   display: flex;
+  color: #F5F5F5;
+  background: rgb(216, 213, 213);
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 100; /* this is optional and should be different for every tree */
 }
 
 .logo img {
   height: 65px;
 }
 
+.logoWrap {
+  position: absolute;
+  left: 25px;
+}
+
 .rhs-buttons {
-  color: black;
+  color: white;
   display: inline-flex;
+  position: absolute;
+  right: 10px;
 }
 
 .rhs-buttons button {
-  color: black;
-  margin-right: 50px;
+  color: white;
+  margin-right: 20px;
 }
 
-.rhs-buttons button:hover {
-  color: #59d08f;
+.searchButton {
+  background-image: url("../img/magGlassTrans.png");
+  background-repeat: no-repeat;
+  background-size: 85% 85%;
+  background-position: center;
+  background-color: rgb(216, 213, 213);
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  box-shadow: none;
+}
+
+.searchButton:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 .logged-in {

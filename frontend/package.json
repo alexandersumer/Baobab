@@ -5,31 +5,44 @@
   "dependencies": {
     "@atlaskit/inline-edit": "^10.0.30",
     "@atlaskit/modal-dialog": "^10.5.4",
+    "@atlaskit/onboarding": "^9.1.4",
+    "@atlaskit/page": "^11.0.12",
     "@atlaskit/textarea": "^2.2.6",
     "@atlaskit/textfield": "^3.1.9",
+    "@material-ui/core": "^4.9.11",
     "@nanway/react-flow-chart": "https://github.com/Nanway/react-flow-chart#3900-release-2",
     "antd": "^3.23.5",
+    "babel-jest": "^24.9.0",
     "firebase": "^7.0.0",
     "firebaseui": "^4.2.0",
+    "flickity": "^2.2.1",
     "immutability-helper": "^3.0.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "node": "^13.12.0",
+    "node-sass": "^4.13.1",
     "qrcode.react": "^1.0.0",
-    "rc-animate": "^2.10.1",
+    "rc-animate": "^2.10.3",
     "rc-queue-anim": "^1.8.2",
     "rc-tween-one": "^2.6.5",
     "react": "^16.10.1",
     "react-beautiful-dnd": "^13.0.0",
+    "react-color": "^2.18.0",
     "react-dom": "^16.10.1",
+    "react-flickity-component": "^3.5.0",
+    "react-ions": "^5.3.5",
     "react-lodash": "^0.1.2",
+    "react-native-onboarding-swiper": "^1.1.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
     "react-tagcloud": "^2.0.0",
+    "react-tooltip-lite": "^1.11.2",
+    "reactcss": "^1.2.3",
     "recharts": "^1.8.5",
     "sentiment": "^5.0.2",
     "styled-components": "^5.0.1",
-    "typeface-roboto": "0.0.75"
+    "typeface-roboto": "0.0.75",
+    "uuid": "^7.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -51,5 +64,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1"
   }
 }

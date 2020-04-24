@@ -1,0 +1,31 @@
+.button-section {
+  width: 50px;
+  right: 10px;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.send-button-container {
+  background: none;
+  border: none;
+  top: 3px;
+  left: 2px;
+  outline: none;
+  position: relative;
+}
+
+.send-button {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.send-button polygon {
+  fill: rgba(86, 88, 103, 0.3);
+}
+
+.send-button-container:focus .send-button polygon, 
+.send-button:hover polygon {
+  fill: rgba(86, 88, 103, 1);
+}

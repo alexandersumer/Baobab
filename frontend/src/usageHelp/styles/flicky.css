@@ -1,0 +1,319 @@
+
+.helpButton {
+    background-image: url("../../img/helpIcon.png");
+    background-repeat: no-repeat;
+    background-size: 45% 60%;
+    background-position: center;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    box-shadow: none;
+    position: absolute;
+    top: 130px;
+    z-index: 100;
+    right: 20px;
+  }
+
+  .sideBarSlider {
+    height: 400px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    
+  }
+  
+  .sideBarImg {
+    height: 300px;
+    width: 400px;
+    background-image: url("../../img/infoNudes/1house.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 120px;
+  
+  }
+  
+  .sideBarText {
+    text-align: center;
+    width: 400px;
+    margin-top: 33px;
+    margin-left: 0px;
+    margin-right: 75px;
+    font-family: sans-serif;
+  }
+
+  .treeNodeSlider {
+    height: 400px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-content: center; 
+  }
+  .treeSliderImg {
+    height: 300px;
+    width: 400px;
+    background-image: url("../../img/infoNudes/2cuddy.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 120px;
+  }
+  .treeSliderText {
+    text-align: center;
+    width: 360px;
+    margin-top: 33px;
+    margin-left: 15px;
+    margin-right: 75px;
+    font-family: sans-serif;
+  }
+  .nodeTreeSlider {
+    height: 400px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;  
+  }
+  .nodeTreeImg {
+    height: 300px;
+    width: 300px;
+    background-image: url("../../img/infoNudes/3wilson.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 45px;
+    margin-top: 100px;
+  }
+  .nodeTreeText {
+    text-align: center;
+    width: 300px;
+    margin-top: 15px;
+    margin-left: 45px;
+    margin-right: 75px;
+    font-family: sans-serif;
+  }
+  .queueSlider {
+    height: 400px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  }
+  .queueSliderImg {
+    height: 300px;
+    width: 300px;
+    background-image: url("../../img/infoNudes/4thirteen.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 130px;
+  }
+  .queueSliderText {
+    text-align: center;
+    width: 300px;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 75px;
+    font-family: sans-serif;
+  }
+  .queueCanvasSlider {
+    height: 400px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  }
+  .queueCanvasImg {
+    height: 300px;
+    width: 300px;
+    background-image: url("../../img/infoNudes/5cameron.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 80px;
+    margin-top: 30px;
+  }
+  .queueCanvasText {
+    text-align: center;
+    width: 300px;
+    margin-top: 20px;
+    margin-left: 45px;
+    margin-right: 75px;
+    font-family: sans-serif;
+  }
+  .kanbanSlider {
+    height: 400px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  }
+  .kanbanImg {
+    height: 300px;
+    width: 300px;
+    background-image: url("../../img/infoNudes/6stacy.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 75px;
+    margin-top: 30px;
+  }
+  .kanbanText {
+    text-align: center;
+    width: 300px;
+    margin-top: 20px;
+    margin-left: 45px;
+    margin-right: 75px;
+    font-family: sans-serif;
+  }
+  .nestedSlider {
+    height: 400px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  }
+  .nestedImg {
+    height: 300px;
+    width: 300px;
+    background-image: url("../../img/infoNudes/7Alli.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 70px;
+    margin-top: 30px;
+  }
+  .nestedText {
+    text-align: center;
+    width: 300px;
+    margin-top: 20px;
+    margin-left: 45px;
+    margin-right: 75px;
+    font-family: sans-serif;
+  }
+  .prettyNodeSlider {
+    height: 400px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-content: center; 
+  }
+  .prettySliderImg {
+    height: 300px;
+    width: 300px;
+    background-image: url("../../img/infoNudes/8taub.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 170px;
+  }
+  .prettySliderText {
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 75px;
+    margin-right: 75px;
+    font-family: sans-serif;
+  }
+  .beforePrettySlider {
+    height: 400px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  }
+  .beforePrettyImg {
+    height: 330px;
+    width: 330px;
+    background-image: url("../../img/infoNudes/9Lucy.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 40px;
+    margin-top: 50px;
+  }
+  .beforePrettyText {
+    text-align: center;
+    margin-top: -60px;
+    margin-left: 60px;
+    margin-right: 40px;
+    font-family: sans-serif;
+  }
+  .afterPrettySlider {
+    height: 400px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  }
+  .afterPrettyImg {
+    height: 310px;
+    width: 310px;
+    background-image: url("../../img/infoNudes/10Theo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 50px;
+    margin-top: 50px;
+  }
+  .afterPrettyText {
+    text-align: center;
+    margin-top: -40px;
+    margin-left: 70px;
+    margin-right: 40px;
+    font-family: sans-serif;
+  }
+  .userSidebar {
+    height: 400px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  }
+  .userImg {
+    height: 300px;
+    width: 400px;
+    background-image: url("../../img/infoNudes/11chase.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 120px;
+  }
+  .userText {
+    text-align: center;
+    width: 300px;
+    margin-top: 10px;
+    margin-left: 40px;
+    margin-right: 75px;
+    font-family: sans-serif;
+  }
+  .deleteNodeSlider {
+    height: 400px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  }
+  .deleteSliderImg {
+    height: 300px;
+    width: 400px;
+    background-image: url("../../img/infoNudes/12Brittany.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 170px;
+  }
+  .deleteSliderText {
+    text-align: center;
+    width: 340px;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 5px;
+    font-family: sans-serif;
+  }
+
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }

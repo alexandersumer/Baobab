@@ -1,7 +1,7 @@
 import { color, grid, borderRadius } from "./Constants";
 import styled from "styled-components";
 
-export const CardContainer = styled.a`
+export const CardContainer = styled.div`
   border-radius: ${borderRadius}px;
   border: 2px solid transparent;
   border-color: transparent;
@@ -13,12 +13,12 @@ export const CardContainer = styled.a`
   margin-bottom: ${grid}px;
   user-select: none;
 
-  /* anchor overrides */
-  color: ${color.N900};
-
   &:hover {
     opacity: 0.75;
   }
+
+  /* anchor overrides */
+  color: ${color.N900};
 
   &:active {
     color: ${color.N900};

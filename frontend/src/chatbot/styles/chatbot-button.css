@@ -1,0 +1,78 @@
+.chatbot-toggle-button {
+  width: 60px;
+  height: 60px;
+  background: #96858F;
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  border-radius: 100%;
+  box-sizing: border-box;
+  transition: box-shadow 100ms ease-in-out;
+  cursor: pointer;
+}
+
+.chatbot-toggle-button:hover {
+  box-shadow: 0 0px 30px 2px rgba(0,0,0,0.3);
+}
+
+.chatbot-toggle-button .minimise-chatbot-icon {
+  width: 34px;
+  height: 20px;
+  position: relative;
+  top: 22px;
+  left: 13px;
+  transition: opacity 200ms ease-in-out;
+  box-sizing: border-box;
+  opacity: 0;
+}
+
+.chatbot-toggle-button .open-chatbot-icon {
+  max-width: 45px;
+  max-height: 45px;
+  position: fixed;
+  bottom: 32px;
+  right: 33px;
+  transition: opacity 200ms ease-in-out;
+}
+
+.chatbot-toggle-button.opened .minimise-chatbot-icon {
+  opacity: 1;
+}
+
+.chatbot-toggle-button.opened .open-chatbot-icon {
+  opacity: 0;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  height: 40px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 6px;
+  position: absolute;
+  left: -160px;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 100%; /* To the right of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent #333;
+}

@@ -1,32 +1,21 @@
-import * as React from 'react'
-import styled from 'styled-components'
-import { FlowChartWithState } from "@nanway/react-flow-chart" 
-import { Page } from './Page'
+import styled from "styled-components";
+import Sike from "../img/whatDoThenumbersMeAN.gif";
+import nice from "../img/assdeaddicks.jpg";
+import { SketchPicker} from 'react-color';
 
-import { chartSimple } from './chartSimple'
+// Add the shit here cunt from Editing Utils
 
-const CanvasOuterCustom = styled.div`
+export const CanvasOuter = styled.div`
   position: relative;
-  background-size: 10px 10px;
-  background-color: #F5F5F5;
-  background-image:
-    linear-gradient(90deg,hsla(0,0%,100%,.1) 1px,transparent 0),
-    linear-gradient(180deg,hsla(0,0%,100%,.1) 1px,transparent 0);
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+  background-size: 100vw 100vh;
+  background-color: ${props => props.config.canvasColour};
+  overflow: hidden  ;
   cursor: not-allowed;
-`
+  margin-left: -4%;
+`;
 
-export const CustomCanvasOuterDemo = () => {
-  return (
-    <Page>
-      <FlowChartWithState
-        initialValue={chartSimple}
-        Components={ {
-          CanvasOuter: CanvasOuterCustom,
-        }}
-      />
-    </Page>
-  )
-}
+
+/*
+previous backgrond-image bullshit
+  background-image: url(${nice});
+*/

@@ -53,14 +53,8 @@ p {
   display: flex;
   color: black;
   font-size: 40px;
-  line-height: 75px;
-  max-width: 608px;
-  min-width: 608px;
-  width: 10%;
-  margin-top: 30%;
-  margin-bottom: 50%;
-  margin-right: 50%;
-  margin-left: 50%;
+  margin-bottom: 20%;
+  white-space: nowrap;
 }
 
 .banner-text form {

@@ -1,8 +1,9 @@
-import * as React from 'react';
-import botIconUrl from '../img/baobab-tree.svg';
+import * as React from "react";
+import botIconUrl from "../img/baobab-tree.svg";
+
+import "./styles/header.css";
 
 class Header extends React.Component {
-
   render() {
     return (
       <div className="chatbot-header">

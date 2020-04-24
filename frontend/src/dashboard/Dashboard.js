@@ -1,14 +1,12 @@
-import {Alert, Button, message, Dropdown, Menu, Icon} from 'antd';
-import {firestore} from 'firebase';
-import React, {Component} from 'react';
-import QueueAnim from 'rc-queue-anim';
-
-import Card from './Card';
-import ProjectForm from './ProjectForm';
-import firebase from '../firebase';
-
-import './Dashboard.css';
+import { Button, message } from "antd";
+import React, { Component } from "react";
+import QueueAnim from "rc-queue-anim";
+import Card from "./Card";
+import TreeForm from "./TreeForm";
+import firebase from "../firebase";
 import Skeleton from "../components/Skeleton";
+import "./Dashboard.css";
+import Stats from "../stats/Stats";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -16,146 +14,152 @@ class Dashboard extends Component {
     this.state = {
       visible: false,
       loading: true,
-      pastProjects: [],
-      filter: 'none'
+      trees: []
     };
     this.observeAuthChange();
-    this.deleteProject = this.deleteProject.bind(this);
+    this.deleteTree = this.deleteTree.bind(this);
   }
 
   showModal = () => {
-    this.setState({visible: true,});
+    this.setState({ visible: true });
   };
 
   handleOk = e => {
-    const {form} = this.formRef.props;
+    const { form } = this.formRef.props;
     form.validateFields(async (err, values) => {
       if (err) {
         return;
       }
 
-      message.info('Creating new project...');
-
-      const dateMoment = form.getFieldValue('Date');
-      const startMoment = form.getFieldValue('Start');
-      const endMoment = form.getFieldValue('End');
-
-      const startDate = new Date(
-        dateMoment.year(), dateMoment.month(), dateMoment.date(),
-        startMoment.hour(), startMoment.minute()
-      );
-      const endDate = new Date(
-        dateMoment.year(), dateMoment.month(), dateMoment.date(),
-        endMoment.hour(), endMoment.minute()
-      );
+      message.info("Creating new tree...");
 
       await firebase.whenAuthReady();
 
-      firebase.getFunctionsInstance().httpsCallable('CreateNewProject')({
-        name: form.getFieldValue('Name'),
-        beginTime: firestore.Timestamp.fromDate(startDate),
-        endTime: firestore.Timestamp.fromDate(endDate),
-        location: form.getFieldValue('Location'),
-        description: form.getFieldValue('Description')
-      })
-        .then((result) => {
-          message.success('Successfully created new project with code: ' + result.data.code, 3);
-          form.resetFields();
-          this.setState({visible: false,});
-          this.getProjects();
+      firebase
+        .getFunctionsInstance()
+        .httpsCallable("CreateNewTree")({
+          name: form.getFieldValue("Name"),
+          description: form.getFieldValue("Description")
         })
-        .catch((error) => {
-          message.error('Failed to create new project with error: ' + error.message, 3);
+        .then(result => {
+          message.success(
+            "Successfully created new tree with name: " + result.data.name,
+            3
+          );
+          form.resetFields();
+          this.setState({ visible: false });
+          this.getTrees();
+        })
+        .catch(error => {
+          message.error(
+            "Failed to create new tree with error: " + error.message,
+            3
+          );
         });
     });
   };
 
   handleCancel = e => {
     console.log(e);
-    message.error('No project made', 2);
-    this.setState({visible: false,});
+    message.error("No tree made", 2);
+    this.setState({ visible: false });
   };
 
   saveFormRef = formRef => {
     this.formRef = formRef;
   };
 
-  getProjects = async () => {
+  getTrees = async () => {
     await firebase.whenAuthReady();
-
-    firebase.getFunctionsInstance().httpsCallable('GetProjectList')()
-      .then((result) => {
+    firebase
+      .getFunctionsInstance()
+      .httpsCallable("GetTreeList")()
+      .then(result => {
         this.setState({
-          pastProjects: result.data.currentProjects.concat(result.data.pastProjects),
+          trees: result.data.trees,
           loading: false
         });
       })
-      .catch((error) => {
-        message.error('Failed to get projects with error: ' + error.message, 3);
+      .catch(error => {
+        message.error("Failed to get trees with error: " + error.message, 3);
       });
   };
 
-  deleteProject(id) {
+  deleteTree(id) {
     this.setState(state => ({
-      pastProjects: state.pastProjects.filter(project => !(project.id === id))
+      trees: state.trees.filter(tree => !(tree.id === id))
     }));
   }
 
   observeAuthChange() {
-    firebase.onAuthStateChanged((user) => {
-      if (user) this.getProjects();
-    });
-  }
-
-  handleFilter(project) {
-    this.setState({
-      filter: project.key,
+    firebase.onAuthStateChanged(user => {
+      if (user) this.getTrees();
     });
   }
 
   render() {
     return (
-      <div className='parentContainer'>
-        <div className='halfWidthContainer'>
-          <h1>My Projects</h1>
-          <br/>
-          <div>
-            <div className='buttonBar'>
-              {this.props.authUser &&
-              <Button type='primary'
-                      style={{float: 'right', backgroundColor: '#59d08f', borderColor: '#59d08f', fontWeight: 'bold'}}
+      <div>
+        <div className="parentContainer">
+          {this.props.authUser ? (
+            <div className="halfWidthContainer">
+              <h1>My Trees</h1>
+              <br />
+              <div>
+                <div className="buttonBar">
+                  {this.props.authUser && (
+                    <Button
+                      type="primary"
+                      style={{
+                        float: "right",
+                        backgroundColor: "#59d08f",
+                        borderColor: "#59d08f",
+                        fontWeight: "bold"
+                      }}
                       onClick={this.showModal}
-              >+ New Project</Button>
-              }
-            </div>
-            <br/>
-            <ProjectForm
-              visible={this.state.visible}
-              onOk={this.handleOk}
-              onCancel={this.handleCancel}
-              title='New Project'
-              okText='Create Project'
-              wrappedComponentRef={this.saveFormRef}
-            />
-          </div>
-          {this.state.loading ? <Skeleton/> :
-            (<QueueAnim className="questions">
-              {this.state.pastProjects.map(record =>
-                <Card key={record.id}
-                      record={record}
-                      altText='active project'
-                      iconPath={require('../img/project-active-icon.svg')}
-                      getProjectsHook={this.getProjects}
-                      deleteProject={this.deleteProject}
-                      filter={this.state.filter}
+                    >
+                      + New Tree
+                    </Button>
+                  )}
+                </div>
+                <br />
+                <TreeForm
+                  visible={this.state.visible}
+                  onOk={this.handleOk}
+                  onCancel={this.handleCancel}
+                  title="New Tree"
+                  okText="Create Tree"
+                  wrappedComponentRef={this.saveFormRef}
                 />
+              </div>
+              {this.state.loading ? (
+                <Skeleton />
+              ) : (
+                <QueueAnim className="trees">
+                  {this.state.trees.map(tree => (
+                    <Card
+                      key={tree.id}
+                      record={tree}
+                      altText="active tree"
+                      iconPath={require("../img/baobab.png")}
+                      getTreesHook={this.getTrees}
+                      deleteTree={this.deleteTree}
+                    />
+                  ))}
+                </QueueAnim>
               )}
-            </QueueAnim>)
-          }
-          {this.state.pastProjects.length < 1 && !this.state.loading && <p className='no-projects'>No projects</p>}
+              {this.state.trees.length < 1 && !this.state.loading && (
+                <p className="no-trees">No Trees</p>
+              )}
+
+              <Stats loading={this.state.loading}></Stats>
+            </div>
+          ) : (
+            "You need to be logged in to view this page"
+          )}
         </div>
       </div>
-    )
+    );
   }
 }
 

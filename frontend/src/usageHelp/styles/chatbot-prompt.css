@@ -1,0 +1,11 @@
+/*
+Styles for prompt in footer of usage help
+*/
+
+.chatbot-message {
+    position: relative;
+    bottom: -20px;
+    left: -135px;
+}
+
+  

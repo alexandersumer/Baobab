@@ -4,11 +4,14 @@ import KanbanIcon from "../img/kanban-icon.png";
 import NestedTreeIcon from "../img/nested-subtree.png";
 import { ReactComponent as KanbanCancelIcon } from "../img/kanban-cancel.svg";
 import { ReactComponent as KanbanOkIcon } from "../img/kanban-ok.svg";
-import { color, borderRadius } from "./Constants";
+import { color, borderRadius, nestedTree, kanbanType } from "./Constants";
+import Tooltip from "react-tooltip-lite";
+import "../toolTip/toolTip.css";
 
 export const clickableButton = (img, clickCallBack) => {
   return (
     <img
+      style={{ height: "35px", width: "35px" }}
       alt="Create a node"
       src={img}
       onClick={e => {
@@ -26,7 +29,7 @@ export function QueueFooter(props) {
   const [taskName, setTaskName] = useState("");
   const { onAdd } = props;
 
-  const onAddText = (text) => {
+  const onAddText = text => {
     if (text.length > 0) {
       setTaskName(text);
     }
@@ -49,23 +52,27 @@ export function QueueFooter(props) {
             marginBottom: "10px"
           }}
         >
-          <div className="KanbanPNGButton">
-            {clickableButton(KanbanIcon, () => {
-              setTask("kanban");
-            })}
-          </div>
-          <div className="KanbanPNGButton">
-            {clickableButton(NestedTreeIcon, () => {
-              setTask("nestedTree");
-            })}
-          </div>
+          <Tooltip content="Create Kanban Board" direction="down">
+            <div className="KanbanPNGButton">
+              {clickableButton(KanbanIcon, () => {
+                setTask(kanbanType);
+              })}
+            </div>
+          </Tooltip>
+          <Tooltip content="Create nested Tree" direction="down">
+            <div className="KanbanPNGButton">
+              {clickableButton(NestedTreeIcon, () => {
+                setTask(nestedTree);
+              })}
+            </div>
+          </Tooltip>
         </CardFooter>
       );
     }
     default: {
-      const title = taskType === "kanban" ? "Board Name?" : "Tree name?";
+      const title = taskType === kanbanType ? "Board Name?" : "Tree name?";
       const cardColor =
-        taskType === "kanban" ? color.QUEUE_KANBAN : color.QUEUE_NESTED;
+        taskType === kanbanType ? color.QUEUE_KANBAN : color.QUEUE_NESTED;
 
       return (
         <div>
@@ -75,6 +82,7 @@ export function QueueFooter(props) {
                 <b>{title}</b>
               </p>
               <input
+                style={{ margin: "1.69px" }}
                 ref={input => input && input.focus()}
                 className="shadowrealm"
                 onChange={event => {

@@ -1,6 +1,7 @@
-import * as React from 'react';
-import Message from './Message';
-import "./chatbotstyles.css";
+import * as React from "react";
+import Message from "./Message";
+
+import "./styles/messages.css";
 
 class MessageList extends React.Component {
   constructor(props) {
@@ -13,17 +14,18 @@ class MessageList extends React.Component {
     this.messagesEnd.scrollIntoView({ behavior: "smooth" });
   }
 
-  render () {
+  render() {
     return (
       <div className="chatbot-message-list">
         {this.props.messages.map((message, index) => {
           return <Message message={message} key={index} />;
         })}
-        <div style={{ float:"left", clear: "both" }}
-          ref={(el) => this.messagesEnd = el}>
-        </div>
+        <div
+          style={{ float: "left", clear: "both" }}
+          ref={el => (this.messagesEnd = el)}
+        ></div>
       </div>
-      );
+    );
   }
 }
 

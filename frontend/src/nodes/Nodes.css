@@ -1,0 +1,13 @@
+.TreeNodeData {
+    left: -30px;
+    top: -30px;
+    position: relative;
+    width: 175px;
+    height: 60px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    vertical-align: middle;
+    line-height: 1;
+}

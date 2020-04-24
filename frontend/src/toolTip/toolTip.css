@@ -1,0 +1,43 @@
+.react-tooltip-lite {
+    background: #333;
+    color: white;
+    border-radius: 5px 5px 5px 5px;
+  }
+  
+.react-tooltip-lite-arrow {
+    border-color: #333;
+}
+
+.treeToolTip {
+    height: 30px;
+    
+}
+
+.queueToolTip {
+    margin-top: 20px;
+    padding-top: 0px;
+    height: 10px;
+    margin-bottom: 40px;
+
+}
+
+.beautifyToolTip {
+    height: 30px;
+    
+}
+
+.deleteToolTip {
+    height: 70px;
+}
+
+.noSelectDelete {
+    height: 70px;
+}
+
+.editToolTip {
+    height: 30px; 
+}
+
+.chatBot {
+    position: relative;
+}

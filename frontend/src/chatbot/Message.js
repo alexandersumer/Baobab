@@ -1,19 +1,27 @@
-import * as React from 'react';
-import "./chatbotstyles.css";
-import botIconUrl from '../img/baobab-tree.svg';
+import * as React from "react";
+import botIconUrl from "../img/baobab-tree.svg";
+
+import "./styles/messages.css";
 
 class Message extends React.Component {
-
-  render () {
+  render() {
     return (
-      <div className= {this.props.message.isUser ? "chatbot-user-message" : "chatbot-bot-message"}>
-        <div className="message-icon" style={{
+      <div
+        className={
+          this.props.message.isUser
+            ? "chatbot-user-message"
+            : "chatbot-bot-message"
+        }
+      >
+        <div
+          className="message-icon"
+          style={{
             backgroundImage: `url(${botIconUrl})`
-          }}></div>
-        <div className = "message-text">
-          {this.props.message.text}
-        </div>
-      </div>);
+          }}
+        ></div>
+        <div className="message-text">{this.props.message.text}</div>
+      </div>
+    );
   }
 }
 

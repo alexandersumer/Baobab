@@ -1,104 +1,139 @@
 /* Customizes the internals/contents of a node
-*   (NOT COLOURING)
-*/
-import * as React from 'react'
-import styled from 'styled-components'
-import { FlowChart, INodeInnerDefaultProps, INodeDefaultProps, IChart } from '@nanway/react-flow-chart'
+ *   (NOT COLOURING)
+ */
+import * as React from "react";
 import { QueueKanban } from "../kanban";
-import { FuckYouSlut, FuckYouTitle } from "./nodeTypes"
-// Place holder chart until backend works
-//import { chartSimple } from '../canvas/chartSimple'
-import { chartUni } from '../canvas/chartUni'
-import { queueData } from '../canvas/queueData'
+import { QDiv, QTitle, ReadViewContainer } from "./nodeTypes";
+import firebase from "../firebase";
+import "./Nodes.css";
 
-
-const getChartDataStub = (id) => {
-  return chartUni;
-};
-
-const getQueueDataStub = () => {
-  return queueData;
-};
+import InlineEdit from "@atlaskit/inline-edit";
+import Textfield from "@atlaskit/textfield";
 
 // TODO make this take in unique queueData
 export const NodeContent = ({ node, config }) => {
-  if (node.properties.custom === 'output-only') {
+  const heading = node.properties.description;
+
+  const getQueueData = () => {
+    if (node.notInDB) {
+      return Promise.resolve({ QueueItems: [] });
+    } else {
+      return firebase
+        .getFunctionsInstance()
+        .httpsCallable("GetQueueItems")({
+          queueHeadID: node.id
+        })
+        .then(result => {
+          return result.data;
+        })
+        .catch(error => {
+          console.error(error);
+          return { QueueItems: [] };
+        });
+    }
+  };
+
+  const reorderQ = columns => {
+    const items = columns.QueueItems.map(item => item.id);
+    return firebase
+      .getFunctionsInstance()
+      .httpsCallable("ReorderQueue")({
+        queueID: node.id,
+        items: items
+      })
+      .then(success => {
+        console.log("Succesful reorder");
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  // updating name
+  const updateName = (id, name) => {
+    config.onNameChange(id, name);
+    return firebase
+      .getFunctionsInstance()
+      .httpsCallable("RenameNode")({
+        name: name,
+        id: id
+      })
+      .then(success => {
+        console.log("Successful rename");
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  if (node.properties.custom === "output-only") {
     return (
-        <div> {node.properties.description}</div>
-    )
-  } else if (node.properties.custom === 'input-output'){
-      return (
-          <div>{node.properties.description}</div>
-      )
-  } else if (node.properties.custom === 'input-only'){
-      return ( // maybe use nanway's lane thing?
-        <FuckYouSlut>
-        <FuckYouTitle>
-          {node.properties.description}
-        </FuckYouTitle>
-          <QueueKanban 
+      <div className="TreeNodeData">
+        <InlineEdit
+          onClick={e => e.stopPropagation()}
+          defaultValue={heading ? heading : "Click to Name"}
+          editView={fieldProps => <Textfield {...fieldProps} autoFocus />}
+          readView={() => (
+            <ReadViewContainer>{heading || "Click to Name"}</ReadViewContainer>
+          )}
+          onConfirm={value => {
+            node.properties.description = value;
+            updateName(node.id, value);
+          }}
+        />
+      </div>
+    );
+  } else if (node.properties.custom === "input-output") {
+    return (
+      <div className="TreeNodeData">
+        <InlineEdit
+          onClick={e => e.stopPropagation()}
+          defaultValue={heading ? heading : "Click to Name"}
+          editView={fieldProps => <Textfield {...fieldProps} autoFocus />}
+          readView={() => (
+            <ReadViewContainer>{heading || "Click to Name"}</ReadViewContainer>
+          )}
+          onConfirm={value => {
+            node.properties.description = value;
+            updateName(node.id, value);
+          }}
+        />
+      </div>
+    );
+  } else if (node.properties.custom === "input-only") {
+    return (
+      <QDiv>
+        <QTitle>
+          <InlineEdit
+            onClick={e => e.stopPropagation()}
+            defaultValue={heading ? heading : "Click to Name"}
+            editView={fieldProps => <Textfield {...fieldProps} autoFocus />}
+            readView={() => (
+              <ReadViewContainer>
+                {heading || "Click to Name"}
+              </ReadViewContainer>
+            )}
+            onConfirm={value => {
+              node.properties.description = value;
+              updateName(node.id, value);
+            }}
+          />
+        </QTitle>
+
+        <div style={{ position: "relative", top: "-37.5px" }}>
+          <QueueKanban
+            reorderBoard={reorderQ}
+            treeID={node.tree}
             parentID={node.id}
-            getData={getQueueDataStub}
+            getData={getQueueData}
             className="shadowrealm"
             initial={{ QueueItems: [] }}
           />
-        </FuckYouSlut>
-      )
-  } else { // just in case
-    return (
-      <p>penis</p>
-    )
+        </div>
+      </QDiv>
+    );
+  } else {
+    // just in case
+    return <p></p>;
   }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-// export class CustomNodeInnerDemoCopy extends React.Component {
-//   public state = cloneDeep(chartUni)
-//   public render () {
-//     const chart = this.state
-//     const stateActions = mapValues(actions, (func: any) =>
-//       (...args: any) => this.setState(func(...args))) as typeof actions
-
-//     return (
-//       <Page>
-//         <Content>
-//           <DragAndDropSideBar></DragAndDropSideBar>
-
-//           <FlowChart
-//             chart={chart}
-//             callbacks={stateActions}
-//             Components={{
-//               NodeInner: NodeOuterCustom,
-//               Node: NodeCustom,
-//               // Additional components 
-//               // Ports
-//               // CanvasOuter
-//               // CanvasInner ...
-//             }}
-//           />
-//           { chart.selected.type
-//           ? <div>
-//               <LowerNodesBox>
-//                 <EditButton onClick={() => stateActions.onDeleteKey({})}> 
-//                 </EditButton>
-
-//                 <DeleteButtonStyling onClick={() => stateActions.onDeleteKey({})}></DeleteButtonStyling>
-//               </LowerNodesBox>
-//             </div>
-//           : <div></div> }
-//         </Content>
-//       </Page>
-//     )
-//   }
-// }
+};

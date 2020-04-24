@@ -1,17 +1,17 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
-import './Skeleton.css';
+import "./Skeleton.css";
 
 class Skeleton extends Component {
   render() {
     return (
-      <div className={this.props.noBorder ? ('skeleton-no-border') : ('skeleton')}>
+      <div className={this.props.noBorder ? "skeleton-no-border" : "skeleton"}>
         <ul>
-          <li className='skeleton-heading'></li>
+          <li className="skeleton-heading"></li>
           <li></li>
         </ul>
       </div>
-    )
+    );
   }
 }
 

@@ -15,11 +15,7 @@ export const reorderCardMap = ({ cardMap, source, destination }) => {
 
   // moving to same list
   if (source.droppableId === destination.droppableId) {
-    const reordered = reorder(
-      current,
-      source.index,
-      destination.index
-    );
+    const reordered = reorder(current, source.index, destination.index);
     const result = {
       ...cardMap,
       [source.droppableId]: reordered
@@ -47,7 +43,7 @@ export const reorderCardMap = ({ cardMap, source, destination }) => {
   };
 };
 
-export function moveBetween({list1, list2, source, destination }) {
+export function moveBetween({ list1, list2, source, destination }) {
   const newFirst = list1.values;
   const newSecond = list2.values;
 

@@ -10,7 +10,7 @@ export function AddCardFooter(props) {
   const [taskName, setTaskName] = useState("");
   const { onAdd } = props;
 
-  const onAddText = (text) => {
+  const onAddText = text => {
     if (text.length > 0) {
       setTaskName(text);
     }
@@ -31,7 +31,21 @@ export function AddCardFooter(props) {
             <p>
               <b>What needs to be done?</b>
             </p>
-            <input onChange={event => onAddText(event.target.value)}></input>
+            <input
+              ref={input => input && input.focus()}
+              onChange={event => {
+                onAddText(event.target.value);
+              }}
+              onClick={e => e.stopPropagation()}
+              onMouseUp={e => e.stopPropagation()}
+              onMouseDown={e => e.stopPropagation()}
+              onKeyDown={e => {
+                e.stopPropagation();
+                if (e.keyCode === 13) {
+                  onClickConfirm();
+                }
+              }}
+            ></input>
           </CardContent>
         </CardContainer>
         <CardFooter>

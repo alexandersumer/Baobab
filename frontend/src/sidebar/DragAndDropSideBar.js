@@ -1,82 +1,147 @@
-/* Renders the upper section of side bar
-*     - Will need to fix the type of thing it creates
-*     - Edit functionality is TODO
-*/
-import * as React from 'react'
-import { REACT_FLOW_CHART } from '@nanway/react-flow-chart'
+import * as React from "react";
+import { REACT_FLOW_CHART } from "@nanway/react-flow-chart";
 
-import { Sidebar } from './SideBar'
-import { Upper } from './SideBarSections'
-import { TreeButton, QueueButton } from "./SideBarNodes"
+import { Sidebar } from "./SideBar";
+import { TreeButton, QueueButton, EditButton } from "./SideBarNodes";
+import { DeleteButton, BeautifyTreeButton, DeleteButtonNah } from "./SideBarNodes";
+import Tooltip from 'react-tooltip-lite';
+import '../toolTip/toolTip.css';
+import { TreeNode, QueueHead } from "../nodes/nodeTypes";
+//import DefaultModal from "./EditModal";
 
-export const TreeNode = ({ type, ports, properties }) => {
+const TreeNodeTool = ({ type, ports, properties }) => {
   return (
-    <TreeButton
-      draggable={true}
-      onDragStart={ (event) => {
-        event.dataTransfer.setData(REACT_FLOW_CHART, JSON.stringify({ type, ports, properties }))
-      } }
+    <Tooltip
+      content="Drag and drop a tree node."
+      direction="right"
+      className="treeToolTip"
     >
-      {type}
-    </TreeButton>
-  )
-}
+      <TreeButton
+        draggable={true}
+        onDragStart={event => {
+          event.dataTransfer.setData(
+            REACT_FLOW_CHART,
+            JSON.stringify({ type, ports, properties })
+          );
+        }}
+      >
+        {type}
+      </TreeButton>
+    </Tooltip>
+  );
+};
 
-export const QueueNode = ({ type, ports, properties }) => {
+const QueueNodeTool = ({ type, ports, properties }) => {
   return (
-    <QueueButton
-      draggable={true}
-      onDragStart={ (event) => {
-        event.dataTransfer.setData(REACT_FLOW_CHART, JSON.stringify({ type, ports, properties }))
-      } }
+    <Tooltip
+      content="Drag and drop a queue node."
+      direction="right"
+      className="queueToolTip"
     >
-      {type}
-    </QueueButton>
-  )
-}
+      <QueueButton
+        className="queue"
+        draggable={true}
+        onDragStart={event => {
+          event.dataTransfer.setData(
+            REACT_FLOW_CHART,
+            JSON.stringify({ type, ports, properties })
+          );
+        }}
+      >
+        {type}
+      </QueueButton>
+    </Tooltip>
+  );
+};
 
-export const DragAndDropSideBar = () => (
-      <Sidebar> 
-        <Upper>
-          <TreeNode
-              type=""
-              ports={ {
-              port1: {
-                  id: 'port1',
-                  type: 'top',
-                  properties: {
-                  custom: 'property',
-                  },
-              },
-              port2: {
-                  id: 'port1',
-                  type: 'bottom',
-                  properties: {
-                  custom: 'property',
-                  },
-              },
-              } }
-              properties={ {
-                custom: 'input-output',
-                description: 'kissa sins',
+export const DragAndDropSideBar = props => {
+  return (
+    <Sidebar>
+      <TreeNodeTool
+        type=""
+        ports={{
+          port1: {
+            id: "port1",
+            type: "input"
+          },
+          port2: {
+            id: "port2",
+            type: "output"
+          }
+        }}
+        properties={{
+          custom: "input-output",
+          description: "Click to Name"
+        }}
+      />
+      <QueueNodeTool
+        type=""
+        ports={{
+          port1: {
+            id: "port1",
+            type: "input",
+            properties: {
+              custom: "property"
+            }
+          }
+        }}
+        properties={{
+          description: "Click to Name",
+          custom: "input-only"
+        }}
+      />
+      <React.Fragment>
+        <Tooltip 
+          content="Click to restructure your tree!" 
+          direction="right"
+          className="beautifyToolTip"
+        >
+          <BeautifyTreeButton
+            onClick={() => {
+              props.onSexify();
+            }}
+          ></BeautifyTreeButton>
+        </Tooltip>
+      </React.Fragment>
+      <React.Fragment>
+        <Tooltip 
+          content="Click to customise your Canvas" 
+          direction="right"
+          className="editToolTip">
+          <EditButton
+            onClick={() => {
+              // ADD SHIT HERE TODO 
+              props.onSidebarEdit();
+            }}
+          >
+          </EditButton>
+        </Tooltip>
+      </React.Fragment>
+
+      {props.selected ? (
+        <React.Fragment>
+          <Tooltip 
+            content="Delete currently selected node." 
+            direction="right"
+            className="deleteToolTip"
+          >
+            <DeleteButton
+              onClick={() => {
+                props.onSidebarDelete();
               }}
-          />
-          <QueueNode
-              type=""
-              ports={ {
-              port1: {
-                  id: 'port1',
-                  type: 'top',
-                  properties: {
-                    custom: 'property',
-                  },
-              },
-              } }
-              properties={ {
-               description: "jonny sins",
-               custom: 'input-only',
-              }}
-          />
-        </Upper>
-      </Sidebar>
-)
+            ></DeleteButton>
+          </Tooltip>
+        </React.Fragment>
+      ) : 
+      <React.Fragment>
+        <Tooltip 
+          content="Select a node or connection to delete it." 
+          direction="right"
+          className="noSelectDelete">
+          <DeleteButtonNah></DeleteButtonNah>
+        </Tooltip>
+      </React.Fragment>
+      }
+    </Sidebar>
+  );
+};

@@ -1,2 +1,3 @@
-#!/usr/bin/env sh
+#!/bin/sh
+
 npm run build && firebase deploy --only hosting

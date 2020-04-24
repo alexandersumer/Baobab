@@ -1,0 +1,45 @@
+
+
+body {
+    font-family: 'montseratt', sans-serif;
+}
+
+
+.weatherApplication {
+    background-size: cover;
+    background-position: bottom;
+    transition: 0.4 ease-out;
+    position: relative;
+    height: 100%;
+    width: 50%;
+}
+
+.bigBoy {
+    min-height: 100%;
+    padding: 25px;
+    margin: auto;
+}
+
+.location-box .date {
+    color: black;
+    font-size: 15px;
+    font-weight: 400;
+    text-align: center;
+    padding-bottom: 3px;
+}
+
+.weather-box {
+    text-align: center;
+    width: 150px;
+    margin: auto;
+}
+
+.weather-box .temp {
+    position: relative;
+    display: inline-block;
+    margin: auto;
+    color: black;
+    font-size: 15px;
+    font-weight: 400;
+    text-align: center;
+}

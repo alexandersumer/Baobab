@@ -4,7 +4,6 @@ import InlineEdit from "@atlaskit/inline-edit";
 import Textfield from "@atlaskit/textfield";
 import Textarea from "@atlaskit/textarea";
 import Modal from "@atlaskit/modal-dialog";
-import { ReactComponent as KanbanCancelIcon } from "../img/kanban-cancel.svg";
 import { ReactComponent as ModalDeleteIcon } from "../img/modal-delete.svg";
 import styled from "styled-components";
 import { grid } from "./Constants";
@@ -26,14 +25,7 @@ const ReadViewContainer = styled.div`
 `;
 
 const Header = ({ onClose }) => {
-  return (
-    <div>
-      <KanbanCancelIcon
-        className="KanbanButton ModalCloseIcon"
-        onClick={onClose}
-      />
-    </div>
-  );
+  return <div></div>;
 };
 
 export function KanbanModal(props) {
@@ -71,9 +63,7 @@ export function KanbanModal(props) {
               </ReadViewContainer>
             );
           }}
-          editView={(fieldProps, ref) => (
-            <Textarea {...fieldProps} ref={ref} />
-          )}
+          editView={(fieldProps, ref) => <Textarea {...fieldProps} ref={ref} />}
           onConfirm={value => {
             card.description = value;
             onChange(card);

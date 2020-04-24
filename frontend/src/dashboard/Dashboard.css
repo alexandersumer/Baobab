@@ -17,16 +17,16 @@ h2 {
   display: inline-block;
 }
 
-.no-projects {
+.no-trees {
   margin-bottom: 50px;
   color: #cacacb;
 }
 
-.project-form .ant-time-picker-icon {
+.tree-form .ant-time-picker-icon {
   right: -210px;
 }
 
-.project-form .ant-form-item-children input {
+.tree-form .ant-form-item-children input {
   height: 40px;
   font-size: 15px;
 }
@@ -40,11 +40,11 @@ h2 {
     height: 60px;
   }
 
-  .project-form .ant-time-picker-icon {
+  .tree-form .ant-time-picker-icon {
     right: -110px;
   }
 
-  .project-form .ant-form-item-control-wrapper input {
+  .tree-form .ant-form-item-control-wrapper input {
     width: 250px;
   }
 }
