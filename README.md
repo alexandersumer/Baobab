@@ -10,18 +10,6 @@ The webapp is developed using React.js for frontend and firebase for the backend
 
 You can visit the website here: https://baobab-82803.firebaseapp.com/
 
-## Landing page:
-
-![](/frontend/src/img/landing-demo.png)
-
-## Tree view:
-
-![](/frontend/src/img/tree-demo.png)
-
-## Kanban view:
-
-![](/frontend/src/img/kanban-demo.png)
-
 ## Local development:
 
 - `cd frontend`
