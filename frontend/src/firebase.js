@@ -7,7 +7,7 @@ import * as firebaseui from "firebaseui";
 import { message } from "antd";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDPycHenv2ptI8SCfkak_5wlJoje0JNbRM",
+  apiKey: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
   authDomain: "baobab-82803.firebaseapp.com",
   databaseURL: "https://baobab-82803.firebaseio.com",
   projectId: "baobab-82803",
