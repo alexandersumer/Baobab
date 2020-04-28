@@ -10,7 +10,7 @@ First of all, make sure you have Node.js installed. You can install it from from
 
 ### Running the frontend
 
-1. Clone the repository from https://github.com/unsw-cse-comp3900-9900/capstone-project-jonny-sins-the-computer-scientist
+1. Clone the repository
 2. Make sure you are in the project directory.
 3. Run the following commands:
 - `cd baobab/frontend`
