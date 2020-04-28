@@ -2,6 +2,8 @@
 
 Baobab is a tree based planning tool. The purpose of Baobab is to simplify and combine long term and short term planning. Our team overcame the drawbacks of currently available planning tools by creating a coherent product that allows users to effectively visualise their long term goal planning, whilst encouraging the management of low level tasks that are required to achieve the larger goals. Baobab is designed with usability, customisations and integrations in mind to provide a streamlined user experience.
 
+Access Vaobab here: https://baobab-82803.firebaseapp.com/
+
 # Developer Documentation
 
 First of all, make sure you have Node.js installed. You can install it from from https://nodejs.org/en/. This installation includes npm.
