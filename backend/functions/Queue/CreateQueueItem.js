@@ -61,7 +61,7 @@ exports.CreateQueueItem = functions
       description: "",
       type: data.type,
       parent: firestore.collection("nodes").doc(data.queueID),
-      tree: firestore.collection("trees").doc(data.tree)
+      tree: firestore.collection("trees").doc(data.tree),
     };
 
     if (data.type === constants.NestedTree) {
@@ -83,17 +83,14 @@ exports.CreateQueueItem = functions
       .collection("nodes")
       .doc(data.id)
       .get()
-      .then(doc => {
+      .then((doc) => {
         if (doc.exists) {
           throw new functions.https.HttpsError(
             "invalid-argument",
             "Document already existed in the database"
           );
         } else {
-          return firestore
-            .collection("nodes")
-            .doc(data.id)
-            .set(queueItem);
+          return firestore.collection("nodes").doc(data.id).set(queueItem);
         }
       })
       .then(() => {
@@ -103,13 +100,13 @@ exports.CreateQueueItem = functions
           .collection("nodes")
           .doc(data.id)
           .set({
-            nodeRef: firestore.collection("nodes").doc(data.id)
+            nodeRef: firestore.collection("nodes").doc(data.id),
           });
       })
       .then(() => {
         return {};
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Failed to create new queue item with error: ", error);
         throw error;
       });

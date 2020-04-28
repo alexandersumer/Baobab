@@ -25,14 +25,14 @@ exports.SearchKanbanItems = functions
       .doc(context.auth.uid)
       .collection("kanbanItems")
       .get()
-      .then(snapshot => {
+      .then((snapshot) => {
         let promises = [];
-        snapshot.forEach(doc => {
+        snapshot.forEach((doc) => {
           promises.push(doc.data().kanbanItemRef.get());
         });
         return Promise.all(promises);
       })
-      .then(values => {
+      .then((values) => {
         let parentNodePromises = [];
         for (let key in values) {
           let kanbanItem = values[key].data();
@@ -44,7 +44,7 @@ exports.SearchKanbanItems = functions
         }
         return Promise.all(parentNodePromises);
       })
-      .then(parentNodes => {
+      .then((parentNodes) => {
         parentNodes.forEach((parent, index) => {
           if (!parentToChildren[parent.id]) {
             parentToChildren[parent.id] = {
@@ -53,10 +53,10 @@ exports.SearchKanbanItems = functions
                 : null,
               [constants.KanbanDone]: parent
                 .get(constants.KanbanDone)
-                .map(item => item.id),
+                .map((item) => item.id),
               [constants.KanbanTodo]: parent
                 .get(constants.KanbanTodo)
-                .map(item => item.id)
+                .map((item) => item.id),
             };
           }
           kanbanItems[index].parent = parent.id;
@@ -66,7 +66,7 @@ exports.SearchKanbanItems = functions
       .then(() => {
         return { kanbanItems: kanbanItems, parentChildren: parentToChildren };
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         throw new functions.https.HttpsError("unknown", error);
       });

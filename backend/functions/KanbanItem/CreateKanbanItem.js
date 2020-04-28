@@ -53,14 +53,14 @@ exports.CreateKanbanItem = functions
       description: "",
       parent: firestore.collection("nodes").doc(data.kanbanID),
       tree: firestore.collection("trees").doc(data.tree),
-      owner: context.auth.uid
+      owner: context.auth.uid,
     };
 
     return firestore
       .collection("kanbanItems")
       .doc(data.id)
       .get()
-      .then(doc => {
+      .then((doc) => {
         if (doc.exists) {
           throw new functions.https.HttpsError(
             "invalid-argument",
@@ -80,13 +80,13 @@ exports.CreateKanbanItem = functions
           .collection("kanbanItems")
           .doc(data.id)
           .set({
-            kanbanItemRef: firestore.collection("kanbanItems").doc(data.id)
+            kanbanItemRef: firestore.collection("kanbanItems").doc(data.id),
           });
       })
       .then(() => {
         return {};
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Failed to create new node with error: ", error);
         throw error;
       });

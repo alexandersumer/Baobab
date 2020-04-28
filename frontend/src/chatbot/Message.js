@@ -16,7 +16,7 @@ class Message extends React.Component {
         <div
           className="message-icon"
           style={{
-            backgroundImage: `url(${botIconUrl})`
+            backgroundImage: `url(${botIconUrl})`,
           }}
         ></div>
         <div className="message-text">{this.props.message.text}</div>

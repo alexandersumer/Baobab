@@ -15,7 +15,7 @@ export const color = {
   QUEUE_NESTED: toRGBA(3, 117, 180, 1.0),
   QUEUE_ICON_BG: toRGBA(110, 196, 219, 0.15),
   TREE_NODE: "#fa7c92",
-  QUEUE_HEAD: "#6ec4db"
+  QUEUE_HEAD: "#6ec4db",
 };
 
 export const doingWidth = "535px";

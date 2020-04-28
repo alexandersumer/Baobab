@@ -14,7 +14,7 @@ class Dashboard extends Component {
     this.state = {
       visible: false,
       loading: true,
-      trees: []
+      trees: [],
     };
     this.observeAuthChange();
     this.deleteTree = this.deleteTree.bind(this);
@@ -24,7 +24,7 @@ class Dashboard extends Component {
     this.setState({ visible: true });
   };
 
-  handleOk = e => {
+  handleOk = (e) => {
     const { form } = this.formRef.props;
     form.validateFields(async (err, values) => {
       if (err) {
@@ -39,9 +39,9 @@ class Dashboard extends Component {
         .getFunctionsInstance()
         .httpsCallable("CreateNewTree")({
           name: form.getFieldValue("Name"),
-          description: form.getFieldValue("Description")
+          description: form.getFieldValue("Description"),
         })
-        .then(result => {
+        .then((result) => {
           message.success(
             "Successfully created new tree with name: " + result.data.name,
             3
@@ -50,7 +50,7 @@ class Dashboard extends Component {
           this.setState({ visible: false });
           this.getTrees();
         })
-        .catch(error => {
+        .catch((error) => {
           message.error(
             "Failed to create new tree with error: " + error.message,
             3
@@ -59,13 +59,13 @@ class Dashboard extends Component {
     });
   };
 
-  handleCancel = e => {
+  handleCancel = (e) => {
     console.log(e);
     message.error("No tree made", 2);
     this.setState({ visible: false });
   };
 
-  saveFormRef = formRef => {
+  saveFormRef = (formRef) => {
     this.formRef = formRef;
   };
 
@@ -74,25 +74,25 @@ class Dashboard extends Component {
     firebase
       .getFunctionsInstance()
       .httpsCallable("GetTreeList")()
-      .then(result => {
+      .then((result) => {
         this.setState({
           trees: result.data.trees,
-          loading: false
+          loading: false,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         message.error("Failed to get trees with error: " + error.message, 3);
       });
   };
 
   deleteTree(id) {
-    this.setState(state => ({
-      trees: state.trees.filter(tree => !(tree.id === id))
+    this.setState((state) => ({
+      trees: state.trees.filter((tree) => !(tree.id === id)),
     }));
   }
 
   observeAuthChange() {
-    firebase.onAuthStateChanged(user => {
+    firebase.onAuthStateChanged((user) => {
       if (user) this.getTrees();
     });
   }
@@ -114,7 +114,7 @@ class Dashboard extends Component {
                         float: "right",
                         backgroundColor: "#59d08f",
                         borderColor: "#59d08f",
-                        fontWeight: "bold"
+                        fontWeight: "bold",
                       }}
                       onClick={this.showModal}
                     >
@@ -136,7 +136,7 @@ class Dashboard extends Component {
                 <Skeleton />
               ) : (
                 <QueueAnim className="trees">
-                  {this.state.trees.map(tree => (
+                  {this.state.trees.map((tree) => (
                     <Card
                       key={tree.id}
                       record={tree}

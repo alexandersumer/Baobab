@@ -33,14 +33,14 @@ exports.DeleteNode = functions
     return (
       docRef
         .get()
-        .then(docData => {
+        .then((docData) => {
           // Remove to delete node from parents
           docData1 = docData;
           treeRef = docData.get("tree");
           if (docData.get("parent")) {
             parentDocRef = docData.get("parent");
             return docData.get("parent").update({
-              children: firebase.firestore.FieldValue.arrayRemove(docRef)
+              children: firebase.firestore.FieldValue.arrayRemove(docRef),
             });
           } else if (!docData.get("treeRoot")) {
             parentDocRef = docData.get("partOf");
@@ -80,26 +80,26 @@ exports.DeleteNode = functions
             return {};
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
           throw error;
         })
     );
   });
 
-const deleteTreeNode = docRef => {
+const deleteTreeNode = (docRef) => {
   return docRef
     .get()
-    .then(doc => {
+    .then((doc) => {
       if (!doc.data()) {
         throw Error("Trying to delete something that doesnt exist");
       }
 
-      const getDeletionData = doc.get("children").map(doc => doc.get());
+      const getDeletionData = doc.get("children").map((doc) => doc.get());
       return Promise.all(getDeletionData);
     })
-    .then(childrenToRid => {
-      const deletionPromises = childrenToRid.map(doc => {
+    .then((childrenToRid) => {
+      const deletionPromises = childrenToRid.map((doc) => {
         if (doc.get("type") === constants.Kanban) {
           return deleteKanbanNode(doc.ref);
         } else {
@@ -115,8 +115,8 @@ const deleteTreeNode = docRef => {
         .collection("nodes")
         .where("partOf", "==", docRef)
         .get()
-        .then(snapshot => {
-          return snapshot.forEach(item => {
+        .then((snapshot) => {
+          return snapshot.forEach((item) => {
             if (item.get("type") === constants.Kanban) {
               return deleteKanbanNode(item.ref);
             } else {
@@ -128,15 +128,15 @@ const deleteTreeNode = docRef => {
           return docRef.delete();
         });
     })
-    .catch(error => {
+    .catch((error) => {
       throw error;
     });
 };
 
-const deleteKanbanNode = docRef => {
+const deleteKanbanNode = (docRef) => {
   return docRef
     .get()
-    .then(doc => {
+    .then((doc) => {
       if (doc.get("type") !== constants.Kanban) {
         throw Error("Trying to delete a non kanban type");
       } else if (!doc.data()) {
@@ -151,11 +151,11 @@ const deleteKanbanNode = docRef => {
         deletionPromises.push(doc.get(constants.KanbanDoing).delete());
       }
 
-      doc.get(constants.KanbanTodo).forEach(kanbanRef => {
+      doc.get(constants.KanbanTodo).forEach((kanbanRef) => {
         deletionPromises.push(kanbanRef.delete());
       });
 
-      doc.get(constants.KanbanDone).forEach(kanbanRef => {
+      doc.get(constants.KanbanDone).forEach((kanbanRef) => {
         deletionPromises.push(kanbanRef.delete());
       });
 
@@ -164,7 +164,7 @@ const deleteKanbanNode = docRef => {
     .then(() => {
       return docRef.delete();
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(error);
       throw error;
     });

@@ -23,7 +23,7 @@ exports.GetTree = functions
     if (data.treeID === null || !data.treeID) {
       throw new functions.https.HttpsError(
         "invalid-argument",
-        "The Tree ID must be non-empty, ligma man"
+        "The Tree ID must be non-empty"
       );
     }
 
@@ -31,12 +31,12 @@ exports.GetTree = functions
 
     return treeRef
       .get()
-      .then(snapshot => {
+      .then((snapshot) => {
         let tree = snapshot.data();
         tree.treeID = data.treeID;
         return tree;
       })
-      .catch(error => {
+      .catch((error) => {
         if (error instanceof functions.https.HttpsError) throw error;
         console.error("Failed to get tree: ", data.treeID, error);
         throw new functions.https.HttpsError(

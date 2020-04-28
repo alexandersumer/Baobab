@@ -4,7 +4,7 @@ import TweenOne from "rc-tween-one";
 const loop = {
   duration: 3000,
   yoyo: true,
-  repeat: -1
+  repeat: -1,
 };
 
 export default function BannerImage() {
@@ -247,7 +247,7 @@ export default function BannerImage() {
           component="g"
           animation={[
             { opacity: 0, type: "from" },
-            { ...loop, y: 5 }
+            { ...loop, y: 5 },
           ]}
         >
           <g id="front_doc" data-name="front doc">

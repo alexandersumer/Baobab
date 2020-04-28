@@ -4,7 +4,6 @@ import { message, Skeleton } from "antd";
 import InProgIcon from "../img/InProg.png";
 import CompletedIcon from "../img/Completed.png";
 import "./Stats.css";
-import { math } from "@atlaskit/theme";
 import Tree1 from "../img/TreeGrow1.png";
 import Tree2 from "../img/TreeGrow2.png";
 import Tree3 from "../img/TreeGrow3.png";
@@ -21,7 +20,7 @@ class Stats extends Component {
     this.state = { finished: 0, inProg: 0 };
   }
 
-  getAchievement = pct => {
+  getAchievement = (pct) => {
     if (pct < 25) {
       return "You've still got a while to go! Keep pushing!";
     } else if (pct >= 25 && pct < 50) {
@@ -39,7 +38,7 @@ class Stats extends Component {
     }
   };
 
-  getTreeStatus = pct => {
+  getTreeStatus = (pct) => {
     if (pct < 10) {
       return Tree1;
     } else if (pct < 25) {
@@ -55,7 +54,7 @@ class Stats extends Component {
     }
   };
 
-  countDoneNotDone = data => {
+  countDoneNotDone = (data) => {
     data = data.data;
     var inProg = 0;
     var finished = 0;
@@ -75,10 +74,10 @@ class Stats extends Component {
       firebase
         .getFunctionsInstance()
         .httpsCallable("SearchKanbanItems")()
-        .then(result => {
+        .then((result) => {
           this.countDoneNotDone(result);
         })
-        .catch(error => {
+        .catch((error) => {
           message.error(
             "Failed to search kanban items with error: " + error.message,
             3
@@ -90,7 +89,12 @@ class Stats extends Component {
   render() {
     const finished = this.state.finished;
     const inProg = this.state.inProg;
-    const pct = Math.ceil((100 * finished) / (finished + inProg));
+    var pct;
+    if (inProg + finished === 0) {
+      pct = 0;
+    } else {
+      pct = Math.ceil((100 * finished) / (finished + inProg));
+    }
     return (
       <div style={{ marginTop: "42px" }}>
         <h1>Your Progress</h1>
@@ -110,7 +114,7 @@ class Stats extends Component {
             ></ProgItem>
             <div className="progBarContainer">
               <div style={{ width: pct + "%" }} className="progBar progBarDone">
-                {inProg === 0 ? "100%" : pct + "%"}
+                {inProg === 0 ? "0%" : pct + "%"}
               </div>
             </div>
             <div style={{ marginTop: "15px" }} className="centreItems">
@@ -131,7 +135,7 @@ class Stats extends Component {
   }
 }
 
-const ProgItem = props => {
+const ProgItem = (props) => {
   return (
     <div className="progContainer progWrapper">
       <div className="progWrapper">

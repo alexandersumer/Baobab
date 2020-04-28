@@ -9,7 +9,7 @@ class Chatbot extends React.Component {
     super(props);
 
     this.state = {
-      isOpen: false
+      isOpen: false,
     };
 
     this.generateReply = this.generateReply.bind(this);
@@ -18,7 +18,7 @@ class Chatbot extends React.Component {
 
   toggleChatbot() {
     this.setState({
-      isOpen: !this.state.isOpen
+      isOpen: !this.state.isOpen,
     });
   }
 
@@ -44,17 +44,17 @@ class Chatbot extends React.Component {
     }
 
     let chatbotInput = {
-      input: input
+      input: input,
     };
 
     await firebase
       .getFunctionsInstance()
       .httpsCallable("GenerateChatbotMessage")(chatbotInput)
-      .then(value => {
+      .then((value) => {
         console.log(value.data);
         replies.push(value.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
 

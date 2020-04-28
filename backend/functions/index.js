@@ -34,4 +34,4 @@ exports.GenerateChatbotMessage = require("./Chatbot/GenerateChatbotMessage").Gen
 
 exports.UpdateColour = require("./Tree/UpdateColour").UpdateColour;
 exports.GetCanvasColour = require("./Tree/GetCanvasColour").GetCanvasColour;
-exports.GetTree = require('./Tree/GetTree').GetTree;
+exports.GetTree = require("./Tree/GetTree").GetTree;

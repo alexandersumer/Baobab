@@ -15,20 +15,20 @@ exports.UpdateNodePositions = functions
       throw new functions.https.HttpsError("invalid-argument", "Missing nodes");
     }
 
-    data.nodes.forEach(item => {
+    data.nodes.forEach((item) => {
       var docRef = firestore.collection("nodes").doc(item.id);
       docRef
         .get()
-        .then(snapshot => {
+        .then((snapshot) => {
           if (snapshot.exists) {
             return docRef.update({
               x: item.x,
-              y: item.y
+              y: item.y,
             });
           }
           return Promise.resolve();
         })
-        .catch(error => {
+        .catch((error) => {
           console.error("Couldnt update positions " + error);
         });
     });

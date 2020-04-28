@@ -6,8 +6,7 @@ import { message } from "antd";
 import Modal from "@atlaskit/modal-dialog";
 import styled from "styled-components";
 
-
-export const convertToSexyTree = (backendData, chart, sexify) => {
+export const convertToSexyTree = (backendData, chart, beautify) => {
   // Given a node and a final structure to use
   // Get the node's children, add to tree, connect to node
   // Repeat for each node
@@ -16,67 +15,81 @@ export const convertToSexyTree = (backendData, chart, sexify) => {
 
   main.type = "Root";
   chart.tree = main.tree;
-  var width = sexyRecursion(main, chart, 500, 0, main.treeHasErrors, sexify);
+  var width = recursiveTreeCreation(
+    main,
+    chart,
+    500,
+    0,
+    main.treeHasErrors,
+    beautify
+  );
 
-  disconnected.forEach(component => {
-    width = sexyRecursion(
+  disconnected.forEach((component) => {
+    width = recursiveTreeCreation(
       component,
       chart,
       width + 50,
       0,
       component.treeHasErrors,
-      sexify
+      beautify
     );
   });
 
   return chart;
 };
 
-const getTypeConstants = type => {
+const getTypeConstants = (type) => {
   if (type === "Queue") {
     return [
       {
         port1: {
           id: "port1",
-          type: "input"
-        }
+          type: "input",
+        },
       },
       "input-only",
-      null
+      null,
     ];
   } else if (type === "HighLevel") {
     return [
       {
         port1: {
           id: "port1",
-          type: "input"
+          type: "input",
         },
         port2: {
           id: "port2",
-          type: "output"
-        }
+          type: "output",
+        },
       },
       "input-output",
-      "port2"
+      "port2",
     ];
   } else {
     return [
       {
         port1: {
           id: "port1",
-          type: "output"
-        }
+          type: "output",
+        },
       },
       "output-only",
-      "port1"
+      "port1",
     ];
   }
 };
 
 // Returns width of node's children
-const sexyRecursion = (node, chart, prevPosX, prevPosY, errors, sexify) => {
+const recursiveTreeCreation = (
+  node,
+  chart,
+  prevPosX,
+  prevPosY,
+  errors,
+  beautify
+) => {
   if (errors) {
-    node.children = node.children.filter(el => el != null);
+    node.children = node.children.filter((el) => el != null);
   }
 
   // Add node to chart
@@ -88,20 +101,20 @@ const sexyRecursion = (node, chart, prevPosX, prevPosY, errors, sexify) => {
       description: node.name,
       custom: nodeConstants[1],
       parent: node.parent,
-      type: node.type
+      type: node.type,
     },
     position: {
-      y: sexify ? prevPosY + 80 : node.y,
-      x: !sexify ? node.x : 0
+      y: beautify ? prevPosY + 80 : node.y,
+      x: !beautify ? node.x : 0,
     },
     ports: nodeConstants[0],
-    tree: node.tree
+    tree: node.tree,
   };
 
   var xpos = prevPosX;
 
   if (!node.children || node.children.length === 0) {
-    if (sexify) {
+    if (beautify) {
       chart.nodes[node.id].position.x = xpos;
     }
     return xpos + 200;
@@ -115,21 +128,28 @@ const sexyRecursion = (node, chart, prevPosX, prevPosY, errors, sexify) => {
       id: node.id + child.id,
       from: {
         nodeId: node.id,
-        portId: nodeConstants[2]
+        portId: nodeConstants[2],
       },
       to: {
         nodeId: child.id,
-        portId: "port1"
-      }
+        portId: "port1",
+      },
     };
     chart.links[link.id] = link;
 
     // Recurse for child
-    xpos = sexyRecursion(child, chart, xpos, prevPosY + 100, errors, sexify);
+    xpos = recursiveTreeCreation(
+      child,
+      chart,
+      xpos,
+      prevPosY + 100,
+      errors,
+      beautify
+    );
   }
 
   // Put it in the middle
-  if (sexify) {
+  if (beautify) {
     var leftMostChild = chart.nodes[node.children[0].id].position.x;
     var rightMostChild =
       chart.nodes[node.children[node.children.length - 1].id].position.x;
@@ -163,14 +183,14 @@ const getParentChild = (nodeA, nodeB, portA, portB) => {
         parent: nodeB,
         child: nodeA,
         parentPort: portB,
-        childPort: portA
+        childPort: portA,
       };
     } else {
       return {
         parent: nodeA,
         child: nodeB,
         parentPort: portA,
-        childPort: portB
+        childPort: portB,
       };
     }
   }
@@ -183,20 +203,20 @@ export const recursiveDelete = (chart, node, reload, onFinish) => {
     chart = {
       offset: {
         x: 0,
-        y: 0
+        y: 0,
       },
       nodes: {},
       links: {},
       selected: {},
       hovered: {},
-      loading: true
+      loading: true,
     };
   } else {
     const deletionQueue = [node.id];
     while (deletionQueue.length > 0) {
       const head = deletionQueue.shift();
       // Delete the connected links and add those nodes to the queue
-      Object.keys(chart.links).forEach(linkId => {
+      Object.keys(chart.links).forEach((linkId) => {
         const link = chart.links[linkId];
         var nextDelete;
 
@@ -238,16 +258,16 @@ export const recursiveDelete = (chart, node, reload, onFinish) => {
   firebase
     .getFunctionsInstance()
     .httpsCallable("DeleteNode")({
-      nodeID: toDelete
+      nodeID: toDelete,
     })
-    .then(data => {
+    .then((data) => {
       console.log(data);
       console.log("Deleted node and all children");
       if (onFinish) {
         onFinish();
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.log("Deletion of " + chart.selected.id + " failed");
       message.error(
         "Deletion of " + chart.selected.id + " failed. Error: " + error.message
@@ -274,12 +294,12 @@ export const deleteLink = (chart, reload) => {
     .getFunctionsInstance()
     .httpsCallable("DeleteConnection")({
       parentID: parentChild.parent.id,
-      childID: parentChild.child.id
+      childID: parentChild.child.id,
     })
     .then(() => {
       console.log("Deleted node/ link and all children");
     })
-    .catch(error => {
+    .catch((error) => {
       message.error(
         "Reloading. Deletion of link failed. Error: " + error.message
       );
@@ -296,7 +316,7 @@ export const validateLink = ({
   fromPortId,
   toNodeId,
   toPortId,
-  chart
+  chart,
 }) => {
   // Can't connect input/ input or output/ output
   if (
@@ -337,7 +357,7 @@ export const onDropCanvas = (chart, tree, root, toDrop, reload) => {
     properties: toDrop.data.properties,
     position: toDrop.position,
     notInDB: true,
-    tree: tree
+    tree: tree,
   };
 
   var nodeType;
@@ -358,12 +378,12 @@ export const onDropCanvas = (chart, tree, root, toDrop, reload) => {
       type: nodeType,
       name: toDrop.data.properties.description,
       x: node.position.x,
-      y: node.position.y
+      y: node.position.y,
     })
-    .then(result => {
+    .then((result) => {
       console.log("Successfully created a new node");
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(error);
       message.error("Creation failed. Reloading. Error: " + error.message);
       reload(root);
@@ -378,7 +398,7 @@ export const linkComplete = (props, chart, reload) => {
     fromPortId,
     toNodeId,
     toPortId,
-    config = {}
+    config = {},
   } = props;
 
   if (
@@ -388,7 +408,7 @@ export const linkComplete = (props, chart, reload) => {
   ) {
     chart.links[linkId].to = {
       nodeId: toNodeId,
-      portId: toPortId
+      portId: toPortId,
     };
 
     const { parent, child } = getParentChild(
@@ -402,12 +422,12 @@ export const linkComplete = (props, chart, reload) => {
       .getFunctionsInstance()
       .httpsCallable("AddConnection")({
         parent: parent.id,
-        child: child.id
+        child: child.id,
       })
       .then(() => {
         console.log("Updated links on backend");
       })
-      .catch(error => {
+      .catch((error) => {
         message.error(
           "Backend update failed due to network delay. Reloading. Error: " +
             error.message

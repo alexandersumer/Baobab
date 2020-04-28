@@ -14,12 +14,12 @@ export const clickableButton = (img, clickCallBack) => {
       style={{ height: "35px", width: "35px" }}
       alt="Create a node"
       src={img}
-      onClick={e => {
+      onClick={(e) => {
         e.stopPropagation();
         clickCallBack();
       }}
-      onMouseUp={e => e.stopPropagation()}
-      onMouseDown={e => e.stopPropagation()}
+      onMouseUp={(e) => e.stopPropagation()}
+      onMouseDown={(e) => e.stopPropagation()}
     />
   );
 };
@@ -29,7 +29,7 @@ export function QueueFooter(props) {
   const [taskName, setTaskName] = useState("");
   const { onAdd } = props;
 
-  const onAddText = text => {
+  const onAddText = (text) => {
     if (text.length > 0) {
       setTaskName(text);
     }
@@ -49,7 +49,7 @@ export function QueueFooter(props) {
           style={{
             backgroundColor: color.QUEUE_ICON_BG,
             borderRadius: borderRadius,
-            marginBottom: "10px"
+            marginBottom: "10px",
           }}
         >
           <Tooltip content="Create Kanban Board" direction="down">
@@ -83,15 +83,15 @@ export function QueueFooter(props) {
               </p>
               <input
                 style={{ margin: "1.69px" }}
-                ref={input => input && input.focus()}
+                ref={(input) => input && input.focus()}
                 className="shadowrealm"
-                onChange={event => {
+                onChange={(event) => {
                   onAddText(event.target.value);
                 }}
-                onClick={e => e.stopPropagation()}
-                onMouseUp={e => e.stopPropagation()}
-                onMouseDown={e => e.stopPropagation()}
-                onKeyDown={e => {
+                onClick={(e) => e.stopPropagation()}
+                onMouseUp={(e) => e.stopPropagation()}
+                onMouseDown={(e) => e.stopPropagation()}
+                onKeyDown={(e) => {
                   e.stopPropagation();
                   if (e.keyCode === 13) {
                     onClickConfirm();
@@ -103,21 +103,21 @@ export function QueueFooter(props) {
           <CardFooter>
             <KanbanOkIcon
               className="KanbanButton"
-              onClick={e => {
+              onClick={(e) => {
                 e.stopPropagation();
                 onClickConfirm();
               }}
-              onMouseUp={e => e.stopPropagation()}
-              onMouseDown={e => e.stopPropagation()}
+              onMouseUp={(e) => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
             ></KanbanOkIcon>
             <KanbanCancelIcon
               className="KanbanButton"
-              onClick={e => {
+              onClick={(e) => {
                 e.stopPropagation();
                 setTask("normal");
               }}
-              onMouseUp={e => e.stopPropagation()}
-              onMouseDown={e => e.stopPropagation()}
+              onMouseUp={(e) => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
             ></KanbanCancelIcon>
           </CardFooter>
         </div>

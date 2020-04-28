@@ -23,9 +23,9 @@ exports.DeleteTree = functions
       .collection("nodes")
       .where("tree", "==", treeRef)
       .get()
-      .then(snapshot => {
+      .then((snapshot) => {
         if (snapshot) {
-          snapshot.forEach(item => {
+          snapshot.forEach((item) => {
             item.ref.delete();
           });
         }
@@ -37,9 +37,9 @@ exports.DeleteTree = functions
           .collection("kanbanItems")
           .where("tree", "==", treeRef)
           .get()
-          .then(snapshot => {
+          .then((snapshot) => {
             if (snapshot) {
-              snapshot.forEach(item => {
+              snapshot.forEach((item) => {
                 item.ref.delete();
               });
             }
@@ -48,7 +48,7 @@ exports.DeleteTree = functions
       })
       .then(() => {
         // eslint-disable-next-line promise/no-nesting
-        return treeRef.get().then(snapshot => {
+        return treeRef.get().then((snapshot) => {
           let promises = [];
           if (snapshot.data().owner) {
             promises.push(
@@ -58,12 +58,9 @@ exports.DeleteTree = functions
           return Promise.all(promises);
         });
       })
-      .then(users => {
+      .then((users) => {
         for (let key in users) {
-          users[key]
-            .collection("trees")
-            .doc(data.treeID)
-            .delete();
+          users[key].collection("trees").doc(data.treeID).delete();
         }
         return null;
       })
@@ -73,7 +70,7 @@ exports.DeleteTree = functions
       .then(() => {
         return {};
       })
-      .catch(error => {
+      .catch((error) => {
         if (error instanceof functions.https.HttpsError) throw error;
         console.error("Failed to delete tree: ", data.treeID, error);
         throw new functions.https.HttpsError(

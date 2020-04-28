@@ -20,12 +20,12 @@ exports.GenerateChatbotMessage = functions
     const queryInput = {
       text: {
         text: data.input,
-        languageCode: "en-US"
-      }
+        languageCode: "en-US",
+      },
     };
 
     const sessionClient = new dialogflow.v2.SessionsClient({
-      credentials: serviceAccount
+      credentials: serviceAccount,
     });
     const session = sessionClient.sessionPath("baobab-82803", sessionId);
 

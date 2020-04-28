@@ -18,10 +18,10 @@ export const reorderCardMap = ({ cardMap, source, destination }) => {
     const reordered = reorder(current, source.index, destination.index);
     const result = {
       ...cardMap,
-      [source.droppableId]: reordered
+      [source.droppableId]: reordered,
     };
     return {
-      cardMap: result
+      cardMap: result,
     };
   }
 
@@ -35,11 +35,11 @@ export const reorderCardMap = ({ cardMap, source, destination }) => {
   const result = {
     ...cardMap,
     [source.droppableId]: current,
-    [destination.droppableId]: next
+    [destination.droppableId]: next,
   };
 
   return {
-    cardMap: result
+    cardMap: result,
   };
 };
 
@@ -56,11 +56,11 @@ export function moveBetween({ list1, list2, source, destination }) {
   return {
     list1: {
       ...list1,
-      values: newFirst
+      values: newFirst,
     },
     list2: {
       ...list2,
-      values: newSecond
-    }
+      values: newSecond,
+    },
   };
 }

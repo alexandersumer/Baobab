@@ -10,7 +10,7 @@ class Landing extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      signInModalVisible: false
+      signInModalVisible: false,
     };
   }
 
@@ -167,7 +167,9 @@ class Landing extends Component {
           <div className="page-1-heading">
             <h1>Our users are important to us.</h1>
             <p>
-              Users are able to customise their experience on our platform to suit their needs. Diversity is about all of us, and about us having to figure out how to walk through this world together.
+              Users are able to customise their experience on our platform to
+              suit their needs. Diversity is about all of us, and about us
+              having to figure out how to walk through this world together.
             </p>
           </div>
           <div className="page-1-boxes">
@@ -178,7 +180,8 @@ class Landing extends Component {
               />
               <h2>Track your progress</h2>
               <p>
-                We have added state of the art gamification to help you keep track of your work.
+                We have added state of the art gamification to help you keep
+                track of your work.
               </p>
             </div>
             <div className="page-1-box">
@@ -188,7 +191,8 @@ class Landing extends Component {
               />
               <h2>User customisation</h2>
               <p>
-                We have added user customisation to help all our users express their unique individuality.
+                We have added user customisation to help all our users express
+                their unique individuality.
               </p>
             </div>
             <div className="page-1-box">
@@ -198,7 +202,8 @@ class Landing extends Component {
               />
               <h2>Onboarding information</h2>
               <p>
-                Get all the information you need to get ahead! Onboarding notes and tooltips at your fingertips.
+                Get all the information you need to get ahead! Onboarding notes
+                and tooltips at your fingertips.
               </p>
             </div>
           </div>

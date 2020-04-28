@@ -3,13 +3,8 @@
  */
 import * as React from "react";
 import { cloneDeep, mapValues } from "lodash";
-import styled from "styled-components";
 import * as actions from "@nanway/react-flow-chart/src/container/actions"; // '../src/container/actions'
-import {
-  FlowChart,
-  INodeInnerDefaultProps,
-  FlowChartWithState
-} from "@nanway/react-flow-chart";
+import { FlowChart } from "@nanway/react-flow-chart";
 import { NodeStyles } from "../../nodes/NodeStyling";
 import { NodeContent } from "../../nodes/NodeContents";
 import { Page } from "../../canvas/Page";
@@ -21,14 +16,13 @@ import { Lower } from "../../sidebar/SideBarSections";
 
 // Place holder chart until backend works
 import { chartUni } from "../../canvas/chartUni";
-import { chartInnerTree } from "../../canvas/chartInnerTree";
 
 export class Landing extends React.Component {
   state = cloneDeep(chartUni);
 
   render() {
     const chart = this.state;
-    const stateActions = mapValues(actions, func => (...args) =>
+    const stateActions = mapValues(actions, (func) => (...args) =>
       this.setState(func(...args))
     );
 
@@ -41,7 +35,7 @@ export class Landing extends React.Component {
           callbacks={stateActions}
           Components={{
             NodeInner: NodeContent,
-            Node: NodeStyles
+            Node: NodeStyles,
             // potential aditional components
             // Ports
             // CanvasOuter

@@ -9,7 +9,7 @@ class SearchItem extends Component {
     this.state = {
       visible: false,
       livestreamSetupVisible: false,
-      inviteFlowVisible: false
+      inviteFlowVisible: false,
     };
   }
 

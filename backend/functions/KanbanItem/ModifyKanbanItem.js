@@ -30,20 +30,20 @@ exports.ModifyKanbanItem = functions
     return docRef
       .update({
         title: data.title,
-        description: data.description
+        description: data.description,
       })
       .then(() => {
         return docRef.get();
       })
-      .then(item => {
+      .then((item) => {
         console.log("Succesfully updated " + item.id);
         return {
           id: item.id,
           title: item.get("title"),
-          description: item.get("description")
+          description: item.get("description"),
         };
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("Modification error: ");
         console.error(error);
         throw error;

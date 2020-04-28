@@ -45,7 +45,7 @@ exports.CreateNewTree = functions
       parent: null,
       x: 500,
       y: 80,
-      treeRoot: true
+      treeRoot: true,
     };
 
     let treeRef;
@@ -54,7 +54,7 @@ exports.CreateNewTree = functions
     return firestore
       .collection("nodes")
       .add(rootNode)
-      .then(rootRef => {
+      .then((rootRef) => {
         nodeRef = rootRef;
         tree.rootNode = firestore.collection("nodes").doc(rootRef.id);
         return rootRef;
@@ -62,13 +62,13 @@ exports.CreateNewTree = functions
       .then(() => {
         return firestore.collection("trees").add(tree);
       })
-      .then(docRef => {
+      .then((docRef) => {
         treeRef = docRef;
         return docRef;
       })
       .then(() => {
         return nodeRef.update({
-          tree: firestore.collection("trees").doc(treeRef.id)
+          tree: firestore.collection("trees").doc(treeRef.id),
         });
       })
       .then(() => {
@@ -78,7 +78,7 @@ exports.CreateNewTree = functions
           .collection("nodes")
           .doc(nodeRef.id)
           .set({
-            nodeRef: nodeRef
+            nodeRef: nodeRef,
           });
       })
       .then(() => {
@@ -88,14 +88,14 @@ exports.CreateNewTree = functions
           .collection("trees")
           .doc(treeRef.id)
           .set({
-            treeRef: firestore.collection("trees").doc(treeRef.id)
+            treeRef: firestore.collection("trees").doc(treeRef.id),
           });
       })
       .then(() => {
         console.log("Successfully inserted a new tree with id: ", treeRef.id);
         return tree;
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Failed to insert a new tree, error: ", error);
         throw new functions.https.HttpsError("unknown", error);
       });
