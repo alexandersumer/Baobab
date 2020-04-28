@@ -72,15 +72,14 @@ Ok so now you've made new code changes and you want to deploy them to updated th
 
 First make sure you are in the project root directory.
 
-First you need to login (you must be a firebase admin)
+First you need to login (you must be a firebase admin, to request admin access email Alexander on z5114400@student.unsw.edu.au to request access, please provide your gmail)
 
 To log into firebase run: `firebase login` (will ask you for gmail and password)
 
 Make sure you are in the project root folder then go to the frontend folder:
 - `cd baobab/frontend`
 - `npm install` (if you haven't done so already)
-- `npm run build`
-- `firebase deploy --only hosting`
+- `sh deploy.sh`
 
 Now the frontend should have any new changes you added.
 
@@ -91,7 +90,7 @@ Run:
 
 Doing this will make changes to the Cloud Functions (if you did change the code)
 
-First you need to login (you must be a firebase admin)
+First you need to login (you must be a firebase admin, to request admin access email Alexander on z5114400@student.unsw.edu.au to request access, please provide your gmail)
 
 Make sure you are in the project root folder then go to the backend folder:
 
@@ -101,7 +100,7 @@ To log into firebase if you are not login: `firebase login`
 - Go to the functions folder: `cd functions`
 - Run: `npm install` (if you haven't done so already)
 - Go back to backend folder:cd `cd ..`
-- Deploy functions: `firebase deploy --only functions`
+- Deploy functions: `firebase deploy`
 
 if not all functions are deployed successfully in one go (happens because of slow internet) firebase will ask you to run another command to deploy only the functions that failed to deploy.
 
