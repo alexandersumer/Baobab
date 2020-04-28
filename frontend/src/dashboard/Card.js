@@ -11,7 +11,7 @@ class Card extends Component {
     this.state = {
       visible: false,
       livestreamSetupVisible: false,
-      inviteFlowVisible: false
+      inviteFlowVisible: false,
     };
   }
 
@@ -19,11 +19,11 @@ class Card extends Component {
     this.setState({ visible: true });
   };
 
-  saveFormRef = formRef => {
+  saveFormRef = (formRef) => {
     this.formRef = formRef;
   };
 
-  handleOk = e => {
+  handleOk = (e) => {
     const { form } = this.formRef.props;
     form.validateFields((err, values) => {
       if (err) {
@@ -41,7 +41,7 @@ class Card extends Component {
         .httpsCallable("UpdateTree")({
           id: this.props.record.id,
           name: form.getFieldValue("Name"),
-          description: form.getFieldValue("Description")
+          description: form.getFieldValue("Description"),
         })
         .then(() => {
           message.success("Updated Tree", 3);
@@ -49,7 +49,7 @@ class Card extends Component {
           this.setState({ visible: false });
           this.props.getTreesHook();
         })
-        .catch(error => {
+        .catch((error) => {
           message.error(
             "Failed to update Tree with error: " + error.message,
             3
@@ -58,7 +58,7 @@ class Card extends Component {
     });
   };
 
-  handleCancel = e => {
+  handleCancel = (e) => {
     console.log(e);
     message.error("Tree not updated", 2);
     this.setState({ visible: false });
@@ -69,12 +69,12 @@ class Card extends Component {
     firebase
       .getFunctionsInstance()
       .httpsCallable("DeleteTree")({
-        treeID: this.props.record.id
+        treeID: this.props.record.id,
       })
       .then(() => {
         message.success("Tree deleted: " + this.props.record.name, 3);
       })
-      .catch(error => {
+      .catch((error) => {
         message.error("Failed to delete Tree with error: " + error.message, 3);
       });
   };
@@ -111,7 +111,7 @@ class Card extends Component {
             className="card-link"
             to={{
               pathname: "/tree/" + this.props.record.rootNode,
-              state: { tree: this.props.record.id }
+              state: { tree: this.props.record.id },
             }}
           >
             <div className="icon-block">

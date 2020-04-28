@@ -44,8 +44,8 @@ export function KanbanModal(props) {
             {heading ? heading : "Add Title Here"}
           </DoingTitle>
         )}
-        editView={fieldProps => <Textfield {...fieldProps} autoFocus />}
-        onConfirm={value => {
+        editView={(fieldProps) => <Textfield {...fieldProps} autoFocus />}
+        onConfirm={(value) => {
           card.title = value;
           onChange(card);
         }}
@@ -64,7 +64,7 @@ export function KanbanModal(props) {
             );
           }}
           editView={(fieldProps, ref) => <Textarea {...fieldProps} ref={ref} />}
-          onConfirm={value => {
+          onConfirm={(value) => {
             card.description = value;
             onChange(card);
           }}

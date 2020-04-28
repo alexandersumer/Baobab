@@ -23,14 +23,14 @@ exports.SearchNodes = functions
       .doc(context.auth.uid)
       .collection("nodes")
       .get()
-      .then(snapshot => {
+      .then((snapshot) => {
         let promises = [];
-        snapshot.forEach(doc => {
+        snapshot.forEach((doc) => {
           promises.push(doc.data().nodeRef.get());
         });
         return Promise.all(promises);
       })
-      .then(values => {
+      .then((values) => {
         let partOfNodePromises = [];
         for (let key in values) {
           let node = values[key].data();
@@ -46,7 +46,7 @@ exports.SearchNodes = functions
         }
         return Promise.all(partOfNodePromises);
       })
-      .then(partOfNodes => {
+      .then((partOfNodes) => {
         partOfNodes.forEach((partOf, index) => {
           nodes[index].partOf = partOf.id;
         });
@@ -56,7 +56,7 @@ exports.SearchNodes = functions
         console.log(nodes);
         return { nodes: nodes };
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         throw new functions.https.HttpsError("unknown", error);
       });

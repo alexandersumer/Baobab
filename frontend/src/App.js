@@ -25,7 +25,7 @@ const PropsRoute = ({ component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={routeProps => {
+      render={(routeProps) => {
         return renderMergedProps(component, routeProps, rest);
       }}
     />
@@ -38,17 +38,17 @@ class App extends React.Component {
     this.state = {
       authUser: null,
       avatar: null,
-      displayName: null
+      displayName: null,
     };
     this.observeAuthChange();
   }
 
   observeAuthChange() {
-    firebase.onAuthStateChanged(authUser => {
+    firebase.onAuthStateChanged((authUser) => {
       this.setState({
         authUser,
         displayName: firebase.getDisplayName(),
-        avatar: firebase.getAvatar()
+        avatar: firebase.getAvatar(),
       });
     });
   }

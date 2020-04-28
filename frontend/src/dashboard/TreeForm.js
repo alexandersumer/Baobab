@@ -12,7 +12,7 @@ const TreeForm = Form.create({ name: "tree-form" })(
         title,
         okText,
         form,
-        preFill
+        preFill,
       } = this.props;
       const { getFieldDecorator } = form;
       return (
@@ -32,15 +32,15 @@ const TreeForm = Form.create({ name: "tree-form" })(
                     {
                       required: true,
                       message: "Please name your Tree! Maximum 40 characters",
-                      max: 40
-                    }
-                  ]
+                      max: 40,
+                    },
+                  ],
                 })(<Input />)}
               </Form.Item>
               <Form.Item label="Description">
                 {getFieldDecorator("Description", {
                   initialValue: preFill ? preFill.description : null,
-                  rules: [{ required: false, message: "Description..." }]
+                  rules: [{ required: false, message: "Description..." }],
                 })(<Input />)}
               </Form.Item>
             </Form>

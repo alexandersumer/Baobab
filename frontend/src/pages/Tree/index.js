@@ -19,10 +19,9 @@ import {
   recursiveDelete,
   deleteLink,
   validateLink,
-  onDropCanvas
+  onDropCanvas,
 } from "./TreeUtils";
 import { CanvasOuter } from "../../canvas/CanvasOuter";
-import { PortCustom } from "../../ports/CustomPort"; // sack
 import { withRouter } from "react-router";
 import { EditModal } from "./EditingUtils";
 
@@ -35,30 +34,28 @@ import loadingTree from "../../img/treee-load.gif";
 // Helper import
 import Helper from "../../usageHelp/Helper";
 
-
 class Treee extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       offset: {
         x: 0,
-        y: 0
+        y: 0,
       },
       nodes: {},
       links: {},
       selected: {},
       hovered: {},
       loading: true,
-      canvasColour: '#f5f5f5',
-      nodeColour: '#fa7c92',
-      queueColour: '#6ec4db',
+      canvasColour: "#f5f5f5",
+      nodeColour: "#fa7c92",
+      queueColour: "#6ec4db",
     };
 
     this.reload = this.reload.bind(this);
     this.setState = this.setState.bind(this);
     this.updatePositions = this.updatePositions.bind(this);
     this.changeColour = this.changeColour.bind(this);
-
   }
 
   componentWillMount() {
@@ -72,26 +69,24 @@ class Treee extends React.Component {
     });
   }
 
-
   updatePositions = () => {
-    console.log("UPDATING!");
     const positionUpdates = [];
-    Object.entries(this.state.nodes).forEach(item => {
+    Object.entries(this.state.nodes).forEach((item) => {
       positionUpdates.push({
         id: item[0],
         x: item[1].position.x,
-        y: item[1].position.y
+        y: item[1].position.y,
       });
     });
     return firebase
       .getFunctionsInstance()
       .httpsCallable("UpdateNodePositions")({
-        nodes: positionUpdates
+        nodes: positionUpdates,
       })
-      .then(result => {
+      .then((result) => {
         console.log("Tree positions updated successfully");
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Failed to update positions with " + error.message);
       });
     // Send this thicc boi to the backend for a state update
@@ -107,23 +102,21 @@ class Treee extends React.Component {
     window.removeEventListener("beforeunload", this.updatePositions);
   }
 
-  resetChart(){
-    return (
-      {
-        offset: {
-          x: 0,
-          y: 0
-        },
-        nodes: {},
-        links: {},
-        selected: {},
-        hovered: {},
-        loading: true,
-        canvasColour: this.state.canvasColour,
-        nodeColour: this.state.nodeColour,
-        queueColour: this.state.queueColour,
-      }
-    );
+  resetChart() {
+    return {
+      offset: {
+        x: 0,
+        y: 0,
+      },
+      nodes: {},
+      links: {},
+      selected: {},
+      hovered: {},
+      loading: true,
+      canvasColour: this.state.canvasColour,
+      nodeColour: this.state.nodeColour,
+      queueColour: this.state.queueColour,
+    };
   }
 
   reload(newID, prettify = false) {
@@ -135,14 +128,13 @@ class Treee extends React.Component {
     tmp.loading = true;
     this.setState(tmp);
 
-    console.log("do we get here");
     firebase.whenAuthReady().then(() => {
       firebase
         .getFunctionsInstance()
         .httpsCallable("GetTreeNodes")({
-          rootNodeID: newID
+          rootNodeID: newID,
         })
-        .then(result => {
+        .then((result) => {
           result = result.data;
           const main = result[0];
           if (main.type === "Queue") {
@@ -155,7 +147,7 @@ class Treee extends React.Component {
             this.setState(convertToSexyTree(result, newChart, prettify));
           }
         })
-        .catch(e => {
+        .catch((e) => {
           if (
             e.message.indexOf("6969") !== -1 ||
             e.message.indexOf("444") !== -1
@@ -169,14 +161,13 @@ class Treee extends React.Component {
             console.error(e);
           }
         });
-        if (typeof this.props.location.state !== "undefined"){
-          firebase
+      if (typeof this.props.location.state !== "undefined") {
+        firebase
           .getFunctionsInstance()
           .httpsCallable("GetTree")({
-            'treeID': this.props.location.state.tree,
+            treeID: this.props.location.state.tree,
           })
-          .then(result => {
-            console.log("ligma cunt");
+          .then((result) => {
             console.log(result);
             this.setState({
               canvasColour: result.data.canvasColour,
@@ -184,15 +175,14 @@ class Treee extends React.Component {
               queueColour: result.data.queueColour,
             });
           })
-          .catch(e => {
+          .catch((e) => {
             console.error(e);
           });
-          }
+      }
     });
-    
   }
 
-  canvasDrop = toDrop => {
+  canvasDrop = (toDrop) => {
     const newChart = onDropCanvas(
       this.state,
       this.state.tree,
@@ -203,7 +193,7 @@ class Treee extends React.Component {
     this.setState(newChart);
   };
 
-  onLinkComplete = props => {
+  onLinkComplete = (props) => {
     const newChart = linkComplete(props, this.state, this.reload);
     this.setState(newChart);
   };
@@ -271,16 +261,14 @@ class Treee extends React.Component {
     }
   };
 
-
-  loadCanvasColour = async () => { 
+  loadCanvasColour = async () => {
     await firebase.whenAuthReady().then(() => {
       firebase
         .getFunctionsInstance()
         .httpsCallable("GetTree")({
-          'treeID': this.props.location.state.tree,
+          treeID: this.props.location.state.tree,
         })
-        .then(result => {
-          console.log("loading canvas colour shit result it");
+        .then((result) => {
           console.log(result);
           this.setState({
             canvasColour: result.data.canvasColour,
@@ -288,37 +276,36 @@ class Treee extends React.Component {
             queueColour: result.data.queueColour,
           });
         })
-        .catch(e => {
+        .catch((e) => {
           console.error(e);
         });
-    }); 
-
-  };  
+    });
+  };
 
   changeColour = (input) => {
+    var validInputFlag = 0;
+    if (this.state.editPressed === true) {
+      if (input.canvasBackground !== undefined && input.nodeBackground !== undefined && input.queueBackground !== undefined){
+        validInputFlag = 1;
+        this.setState({
+          canvasColour: input.canvasBackground,
+          nodeColour: input.nodeBackground,
+          queueColour: input.queueBackground,
+          editPressed: false,
+        });
+      }
 
-    console.log("hello romy");
-    console.log(input);
-
-    if (this.state.editPressed === true){
-      this.setState( {
-        canvasColour: input.canvasBackground,
-        nodeColour: input.nodeBackground,
-        queueColour: input.queueBackground,
-        editPressed: false,
-      });
-
-      if (typeof this.props.location.state !== "undefined"){
+      if (typeof this.props.location.state !== undefined && validInputFlag  === 1) {
         firebase.whenAuthReady().then(() => {
           firebase
             .getFunctionsInstance()
             .httpsCallable("UpdateColour")({
-              'id': this.props.location.state.tree,
-              'canvasColour': input.canvasBackground,
-              'nodeColour': input.nodeBackground,
-              'queueColour': input.queueBackground,
+              id: this.props.location.state.tree,
+              canvasColour: input.canvasBackground,
+              nodeColour: input.nodeBackground,
+              queueColour: input.queueBackground,
             })
-            .catch(e => {
+            .catch((e) => {
               console.error(e);
             });
         });
@@ -359,7 +346,7 @@ class Treee extends React.Component {
   render() {
     const chart = this.state;
     actions.onLinkComplete = this.onLinkComplete;
-    const stateActions = mapValues(actions, func => (...args) => {
+    const stateActions = mapValues(actions, (func) => (...args) => {
       const res = func(...args);
       this.setState(res);
     });
@@ -368,7 +355,7 @@ class Treee extends React.Component {
     stateActions.onDeleteKey = this.onDeleteKey;
     stateActions.onSidebarDelete = this.onDeletePressed;
     stateActions.onSidebarEdit = this.onSidebarEdit;
-    stateActions.onDragNodeStop = xd => {
+    stateActions.onDragNodeStop = (xd) => {
       console.log("hehhe");
     };
 
@@ -377,13 +364,13 @@ class Treee extends React.Component {
       {
         text: "Delete",
         onClick: this.state.deleteAction,
-        appearance: "danger"
+        appearance: "danger",
       },
-      { 
-        text: "Close", 
-        onClick: this.close, 
-        appearance: "warning" 
-      }
+      {
+        text: "Close",
+        onClick: this.close,
+        appearance: "warning",
+      },
     ];
 
     if (this.props.authUser) {
@@ -412,9 +399,9 @@ class Treee extends React.Component {
                   config={{
                     smartRouting: true, // Does not work because non most updated drag n drop
                     validateLink: validateLink,
-                    onNameChange: this.onNameChange, 
+                    onNameChange: this.onNameChange,
                     canvasColour: this.state.canvasColour,
-                    nodeColour: this.state.nodeColour, //"#B58D3D" 
+                    nodeColour: this.state.nodeColour, //"#B58D3D"
                     queueColour: this.state.queueColour, //"#F5D300"
                   }}
                   callbacks={stateActions}
@@ -441,15 +428,14 @@ class Treee extends React.Component {
           )}
           <ModalTransition>
             {chart.editPressed && (
-                <EditModal
-                  onClose={this.editClose}
-                  onSave={this.changeColour}
-                >
-                </EditModal>
+              <EditModal
+                onClose={this.editClose}
+                onSave={this.changeColour}
+              ></EditModal>
             )}
           </ModalTransition>
           <Helper />
-         </div>
+        </div>
       );
     } else {
       return "You need to be logged in";

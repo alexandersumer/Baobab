@@ -31,19 +31,16 @@ exports.GetKanbanItems = functions
       .collection("nodes")
       .doc(data.kanbanID)
       .get()
-      .then(data => {
+      .then((data) => {
         if (!data.exists) {
           throw new Error("444", "403 baby");
         }
         return Promise.resolve();
       })
       .then(() => {
-        return firestore
-          .collection("nodes")
-          .doc(data.kanbanID)
-          .get();
+        return firestore.collection("nodes").doc(data.kanbanID).get();
       })
-      .then(docRef => {
+      .then((docRef) => {
         kanbanData = docRef.data();
 
         if (!kanbanData) {
@@ -57,13 +54,13 @@ exports.GetKanbanItems = functions
         const kanbanColumns = [
           kanbanData.ToDo,
           kanbanData.Doing,
-          kanbanData.Done
+          kanbanData.Done,
         ];
 
         kanbanColumns.forEach((item, index) => {
           const childPromises = [];
           if (item && index !== 1) {
-            item.forEach(docRef => {
+            item.forEach((docRef) => {
               childPromises.push(docRef.get());
             });
           } else if (item && index === 1) {
@@ -75,15 +72,15 @@ exports.GetKanbanItems = functions
 
         return Promise.all(itemPromises);
       })
-      .then(resolvedPromises => {
-        const convertToForm = snapshot => {
+      .then((resolvedPromises) => {
+        const convertToForm = (snapshot) => {
           const result = [];
-          snapshot.forEach(item => {
+          snapshot.forEach((item) => {
             const itemData = item.data();
             result.push({
               id: item.id,
               title: itemData.title,
-              description: itemData.description
+              description: itemData.description,
             });
           });
           return result;
@@ -92,11 +89,11 @@ exports.GetKanbanItems = functions
         var kanbanResult = {
           [constants.KanbanTodo]: convertToForm(resolvedPromises[0]),
           [constants.KanbanDoing]: convertToForm(resolvedPromises[1]),
-          [constants.KanbanDone]: convertToForm(resolvedPromises[2])
+          [constants.KanbanDone]: convertToForm(resolvedPromises[2]),
         };
         return [kanbanResult, kanbanData.tree.id, kanbanData.name];
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("Caught error");
         console.error(error);
         if (error instanceof functions.https.HttpsError) {

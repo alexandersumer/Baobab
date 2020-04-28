@@ -4,7 +4,7 @@ import "../motivationSection/motivation.css";
 
 const api = {
   key: "cf1d51594b5204f5f694ed39ca15f710",
-  base: "http://api.openweathermap.org/data/2.5/"
+  base: "http://api.openweathermap.org/data/2.5/",
 };
 
 class WeatherApplication extends Component {
@@ -13,7 +13,7 @@ class WeatherApplication extends Component {
     this.state = {
       geoCoords: {
         long: "",
-        lat: ""
+        lat: "",
       },
       query: "",
       temp: "",
@@ -23,49 +23,45 @@ class WeatherApplication extends Component {
   }
 
   getPosition = (location) => {
-
     let geoLocation = {
-      long: (location.coords.longitude).toString(),
-      lat: (location.coords.latitude).toString()
-    }
-    this.setState({ geoCoords: geoLocation})
-
-  }
+      long: location.coords.longitude.toString(),
+      lat: location.coords.latitude.toString(),
+    };
+    this.setState({ geoCoords: geoLocation });
+  };
 
   getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.getPosition);
     }
-  }
+  };
 
   getQuery = () => {
     if (this.state.geoCoords.long === "") {
       return "https://api.openweathermap.org/data/2.5/weather?q=Sydney&units=metric&appid=cf1d51594b5204f5f694ed39ca15f710";
-      
     } else {
-      let searchQuery = `${api.base}weather?lat=${this.state.geoCoords.lat}&lon=${this.state.geoCoords.long}&units=metric&appid=${api.key}`
-      return searchQuery
-      
+      let searchQuery = `${api.base}weather?lat=${this.state.geoCoords.lat}&lon=${this.state.geoCoords.long}&units=metric&appid=${api.key}`;
+      return searchQuery;
     }
-  }
+  };
 
   getWeather = (APIQuery) => {
     fetch(APIQuery)
-      .then(res => res.json())
-      .then(result => {
+      .then((res) => res.json())
+      .then((result) => {
         this.setState({
           weather: result,
           temp: result.main.temp,
           weatherDescription: result.weather[0].main,
-          weatherDone: true
+          weatherDone: true,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         throw err;
       });
   };
 
-  dateBuilder = d => {
+  dateBuilder = (d) => {
     let months = [
       "January",
       "February",
@@ -78,7 +74,7 @@ class WeatherApplication extends Component {
       "September",
       "October",
       "November",
-      "December"
+      "December",
     ];
     let days = [
       "Sunday",
@@ -87,7 +83,7 @@ class WeatherApplication extends Component {
       "Wednesday",
       "Thursday",
       "Friday",
-      "Saturday"
+      "Saturday",
     ];
 
     let day = days[d.getDay()];
@@ -98,7 +94,7 @@ class WeatherApplication extends Component {
     return `${day} ${date} ${month} ${year}`;
   };
 
-  getRandomNumber = max => {
+  getRandomNumber = (max) => {
     return Math.floor(Math.random() * Math.floor(max));
   };
 
@@ -108,7 +104,7 @@ class WeatherApplication extends Component {
       "Work hard until you no longer have to introduce yourself ~ Johnny Sins",
       "A man stands out for his ability to not give up and fight until the end",
       "You may love a girl deeply but you can't express it more deeper than 7-8 inches ~ Johnny Sins",
-      "I failed some subjects in highschool, but my friend passed all. Now he is the cameraman and I am the star ~ Johnny Sins"
+      "I failed some subjects in highschool, but my friend passed all. Now he is the cameraman and I am the star ~ Johnny Sins",
     ];
 
     let randNum = this.getRandomNumber(5);
@@ -118,8 +114,7 @@ class WeatherApplication extends Component {
 
   render() {
     this.getLocation();
-    this.getWeather(this.getQuery())
-    
+    this.getWeather(this.getQuery());
 
     return (
       <div className="weatherApplication">
@@ -129,7 +124,9 @@ class WeatherApplication extends Component {
               <div className="date">{this.dateBuilder(new Date())}</div>
             </div>
             <div className="weather-box">
-              <div className="temp">{Math.round(this.state.temp)}˚C, {this.state.weatherDescription}</div>
+              <div className="temp">
+                {Math.round(this.state.temp)}˚C, {this.state.weatherDescription}
+              </div>
             </div>
           </div>
         </div>

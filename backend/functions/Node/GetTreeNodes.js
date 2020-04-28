@@ -30,7 +30,7 @@ exports.GetTreeNodes = functions
       const nodeData = node.data();
 
       if ((!nodeData || nodeData === null) && parent === null) {
-        throw new functions.https.HttpsError("6969", "404 baby");
+        throw new functions.https.HttpsError("6969", "404");
       } else if (!nodeData || nodeData === null) {
         console.error("DB error " + node.id + " wasnt found");
         root.treeHasErrors = true;
@@ -46,7 +46,7 @@ exports.GetTreeNodes = functions
         tree: nodeData.tree.id,
         parent: nodeData.parent === null ? null : nodeData.parent.id,
         x: nodeData.x ? nodeData.x : 0,
-        y: nodeData.y ? nodeData.y : 0
+        y: nodeData.y ? nodeData.y : 0,
       };
 
       if (nodeData.type === constants.NestedTree && parent === null) {
@@ -69,7 +69,7 @@ exports.GetTreeNodes = functions
         childrenPromises = [];
         nodeData.children.forEach((doc, ind) => {
           childrenPromises.push(
-            doc.get().then(data => {
+            doc.get().then((data) => {
               if (data.exists) {
                 return getData(currentNode, data, ind, root);
               } else {
@@ -92,23 +92,20 @@ exports.GetTreeNodes = functions
       .collection("nodes")
       .doc(data.rootNodeID)
       .get()
-      .then(data => {
+      .then((data) => {
         if (!data.exists) {
           throw new Error("444");
         }
         return Promise.resolve();
       })
       .then(() => {
-        return firestore
-          .collection("nodes")
-          .doc(data.rootNodeID)
-          .get();
+        return firestore.collection("nodes").doc(data.rootNodeID).get();
       })
-      .then(data => {
+      .then((data) => {
         const root = {};
         return getData(null, data, root);
       })
-      .then(root => {
+      .then((root) => {
         const rootRef = firestore.collection("nodes").doc(data.rootNodeID);
         // eslint-disable-next-line promise/no-nesting
         return firestore
@@ -116,23 +113,23 @@ exports.GetTreeNodes = functions
           .where("partOf", "==", rootRef)
           .where("parent", "==", null)
           .get()
-          .then(snapshot => {
+          .then((snapshot) => {
             const disconnectedComponentPromises = [];
             if (snapshot) {
-              snapshot.forEach(item => {
+              snapshot.forEach((item) => {
                 disconnectedComponentPromises.push(getData(null, item, {}));
               });
             }
             return Promise.all(disconnectedComponentPromises);
           })
-          .then(disconnectedParts => {
+          .then((disconnectedParts) => {
             return [root, disconnectedParts];
           });
       })
-      .then(results => {
+      .then((results) => {
         return results;
       })
-      .catch(error => {
+      .catch((error) => {
         if (error instanceof functions.https.HttpsError) {
           throw error;
         } else if (error.message.indexOf("6969") !== -1) {

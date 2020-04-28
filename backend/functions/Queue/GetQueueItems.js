@@ -31,25 +31,25 @@ exports.GetQueueItems = functions
       .collection("nodes")
       .doc(data.queueHeadID)
       .get()
-      .then(snapshot => {
+      .then((snapshot) => {
         const data = snapshot.data();
         var childrenPromises;
 
         if (data.children) {
-          childrenPromises = data.children.map(item => item.get());
+          childrenPromises = data.children.map((item) => item.get());
         } else {
           childrenPromises = [];
         }
         return Promise.all(childrenPromises);
       })
-      .then(childrenSnapshot => {
+      .then((childrenSnapshot) => {
         if (childrenSnapshot.length > 0) {
-          const result = childrenSnapshot.map(child => {
+          const result = childrenSnapshot.map((child) => {
             const data = child.data();
             return {
               title: data.name,
               type: data.type,
-              id: child.id
+              id: child.id,
             };
           });
           return { QueueItems: result };
@@ -57,7 +57,7 @@ exports.GetQueueItems = functions
           return { QueueItems: [] };
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Failed to get queue nodes with error: ", error);
         throw error;
       });

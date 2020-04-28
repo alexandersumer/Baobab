@@ -23,12 +23,11 @@ exports.GetCanvasColour = functions
 
     return treeRef
       .get()
-      .then(docRef => {
+      .then((docRef) => {
         let docData = docRef.data();
         return docData.canvasColour;
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   });
-

@@ -11,7 +11,7 @@ class Window extends React.Component {
 
     this.state = {
       currMessage: "",
-      messages: []
+      messages: [],
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,8 +19,8 @@ class Window extends React.Component {
   }
 
   addMessageToList(msg) {
-    this.setState(state => ({
-      messages: [...state.messages, msg]
+    this.setState((state) => ({
+      messages: [...state.messages, msg],
     }));
   }
 

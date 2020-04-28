@@ -17,8 +17,8 @@ class Header extends Component {
       signInModalVisible: false,
       helpModalVisible: false,
       flickityOptions: {
-        initialIndex: 0
-      }
+        initialIndex: 0,
+      },
     };
     this.signOut = this.signOut.bind(this);
   }
@@ -39,7 +39,7 @@ class Header extends Component {
   }
 
   setHelpModalVisible(helpModalVisible) {
-    this.setState({ helpModalVisible: helpModalVisible })
+    this.setState({ helpModalVisible: helpModalVisible });
   }
 
   dropdownMenu = () => (
@@ -57,7 +57,7 @@ class Header extends Component {
     const tokens = this.props.match.url.split("/");
     return (
       this.props.authUser &&
-      tokens.find(val => val === "tree" || val === "kanban")
+      tokens.find((val) => val === "tree" || val === "kanban")
     );
   };
 
@@ -77,7 +77,7 @@ class Header extends Component {
           </div>
           {this.shouldHaveNav() && (
             <NavigationStack
-              onNavigate={path => {
+              onNavigate={(path) => {
                 this.props.history.push(path);
               }}
               pageID={this.getPageID()}
@@ -86,10 +86,11 @@ class Header extends Component {
         </div>
         {/* <WeatherApplication></WeatherApplication> */}
         <div className="rhs-buttons">
-          <button 
+          <button
             className="searchButton"
-            onClick={() => this.setTreeModalVisible(true)} size={"large"}>
-          </button>
+            onClick={() => this.setTreeModalVisible(true)}
+            size={"large"}
+          ></button>
           <Modal
             title="Search"
             style={{ top: 20 }}
@@ -100,8 +101,6 @@ class Header extends Component {
           >
             <Search doClose={() => this.setTreeModalVisible(false)} />
           </Modal>
-
-
 
           <Modal
             title="Sign In or Register"

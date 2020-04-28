@@ -19,8 +19,7 @@ const PortDefaultOuter = styled.div`
   align-items: center;
 `;
 
-// ugly as fuck
-export const PortCustom = props => (
+export const PortCustom = (props) => (
   <PortDefaultOuter>
     {props.port.properties && props.port.properties.value === "yes" && (
       <svg style={{ width: "24px", height: "24px" }} viewBox="0 0 24 24">

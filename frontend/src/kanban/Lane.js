@@ -17,7 +17,7 @@ export const getBackgroundColor = (isDraggingOver, isDraggingFrom) => {
 };
 
 const Wrapper = styled.div`
-  background-color: ${props =>
+  background-color: ${(props) =>
     getBackgroundColor(props.isDraggingOver, props.isDraggingFrom)};
   display: flex;
   height: fit-content;
@@ -84,7 +84,7 @@ const CardList = React.memo(function CardList(props) {
         style={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "center"
+          justifyContent: "center",
         }}
       >
         <img src={loadingSpinner}></img>
@@ -128,7 +128,7 @@ export default function Lane(props) {
     header,
     footer,
     onCardClick,
-    loading
+    loading,
   } = props;
 
   return (

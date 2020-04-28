@@ -21,7 +21,7 @@ exports.ReorderQueue = functions
 
     var newOrder;
     if (data.items) {
-      newOrder = data.items.map(itemID => {
+      newOrder = data.items.map((itemID) => {
         return firestore.collection("nodes").doc(itemID);
       });
     } else {
@@ -32,13 +32,13 @@ exports.ReorderQueue = functions
       .collection("nodes")
       .doc(data.queueID)
       .update({
-        children: newOrder
+        children: newOrder,
       })
       .then(() => {
         console.log("Reorder successful");
         return {};
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
         throw error;
       });

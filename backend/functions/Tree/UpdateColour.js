@@ -27,29 +27,28 @@ exports.UpdateColour = functions
         "The tree must have an ID bro."
       );
     }
-    
+
     if (data.canvasColour === null || data.canvasColour === "") {
-        throw new functions.https.HttpsError(
-          "invalid-argument",
-          "Thre tree must have a valid canvas colour"
-        );
+      throw new functions.https.HttpsError(
+        "invalid-argument",
+        "Thre tree must have a valid canvas colour"
+      );
     }
 
     if (data.nodeColour === null || data.nodeColour === "") {
-        throw new functions.https.HttpsError(
-          "invalid-argument",
-          "Thre tree must have a valid node colour"
-        );
+      throw new functions.https.HttpsError(
+        "invalid-argument",
+        "Thre tree must have a valid node colour"
+      );
     }
 
     if (data.queueColour === null || data.queueColour === "") {
-        throw new functions.https.HttpsError(
-          "invalid-argument",
-          "Thre tree must have a valide queue colour"
-        );
+      throw new functions.https.HttpsError(
+        "invalid-argument",
+        "Thre tree must have a valide queue colour"
+      );
     }
 
-    //console.log("updateing colours cunt");
     let treeRef = firestore.collection("trees").doc(data.id);
 
     return treeRef
@@ -61,13 +60,13 @@ exports.UpdateColour = functions
       .then(() => {
         return treeRef.get();
       })
-      .then(snapshot => {
+      .then((snapshot) => {
         return {
           name: snapshot.get("name"),
           canvasColour: snapshot.get("canvasColour"),
         };
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Failed to update canvas colour, error: ", error);
         throw new functions.https.HttpsError("unknown", error);
       });

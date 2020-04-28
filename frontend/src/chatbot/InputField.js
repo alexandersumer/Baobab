@@ -8,7 +8,7 @@ class InputField extends React.Component {
     super(props);
     this.state = {
       inputActive: false,
-      inputHasText: false
+      inputHasText: false,
     };
 
     this.submitMessage = this.submitMessage.bind(this);
@@ -40,7 +40,7 @@ class InputField extends React.Component {
     if (this.isAlphaNumeric(message)) {
       this.props.handleSubmit({
         isUser: true,
-        text: message
+        text: message,
       });
     }
     if (this.input) this.input.innerHTML = "";
@@ -62,7 +62,7 @@ class InputField extends React.Component {
           onBlur={() => {
             this.setState({ inputActive: false });
           }}
-          ref={e => {
+          ref={(e) => {
             this.input = e;
           }}
           onKeyDown={this.handleKeyDown}

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Editable.css";
 
-// i dont think i need to change any of this shit cunt
-
 const Editable = ({
   text,
   type,
@@ -38,7 +36,7 @@ const Editable = ({
       {isEditing ? (
         <div
           onBlur={() => setEditing(false)}
-          onKeyDown={e => handleKeyDown(e, type)}
+          onKeyDown={(e) => handleKeyDown(e, type)}
         >
           {children}
         </div>

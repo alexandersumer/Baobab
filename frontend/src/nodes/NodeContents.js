@@ -21,30 +21,30 @@ export const NodeContent = ({ node, config }) => {
       return firebase
         .getFunctionsInstance()
         .httpsCallable("GetQueueItems")({
-          queueHeadID: node.id
+          queueHeadID: node.id,
         })
-        .then(result => {
+        .then((result) => {
           return result.data;
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
           return { QueueItems: [] };
         });
     }
   };
 
-  const reorderQ = columns => {
-    const items = columns.QueueItems.map(item => item.id);
+  const reorderQ = (columns) => {
+    const items = columns.QueueItems.map((item) => item.id);
     return firebase
       .getFunctionsInstance()
       .httpsCallable("ReorderQueue")({
         queueID: node.id,
-        items: items
+        items: items,
       })
-      .then(success => {
+      .then((success) => {
         console.log("Succesful reorder");
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   };
@@ -56,12 +56,12 @@ export const NodeContent = ({ node, config }) => {
       .getFunctionsInstance()
       .httpsCallable("RenameNode")({
         name: name,
-        id: id
+        id: id,
       })
-      .then(success => {
+      .then((success) => {
         console.log("Successful rename");
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   };
@@ -70,13 +70,13 @@ export const NodeContent = ({ node, config }) => {
     return (
       <div className="TreeNodeData">
         <InlineEdit
-          onClick={e => e.stopPropagation()}
+          onClick={(e) => e.stopPropagation()}
           defaultValue={heading ? heading : "Click to Name"}
-          editView={fieldProps => <Textfield {...fieldProps} autoFocus />}
+          editView={(fieldProps) => <Textfield {...fieldProps} autoFocus />}
           readView={() => (
             <ReadViewContainer>{heading || "Click to Name"}</ReadViewContainer>
           )}
-          onConfirm={value => {
+          onConfirm={(value) => {
             node.properties.description = value;
             updateName(node.id, value);
           }}
@@ -87,13 +87,13 @@ export const NodeContent = ({ node, config }) => {
     return (
       <div className="TreeNodeData">
         <InlineEdit
-          onClick={e => e.stopPropagation()}
+          onClick={(e) => e.stopPropagation()}
           defaultValue={heading ? heading : "Click to Name"}
-          editView={fieldProps => <Textfield {...fieldProps} autoFocus />}
+          editView={(fieldProps) => <Textfield {...fieldProps} autoFocus />}
           readView={() => (
             <ReadViewContainer>{heading || "Click to Name"}</ReadViewContainer>
           )}
-          onConfirm={value => {
+          onConfirm={(value) => {
             node.properties.description = value;
             updateName(node.id, value);
           }}
@@ -105,15 +105,15 @@ export const NodeContent = ({ node, config }) => {
       <QDiv>
         <QTitle>
           <InlineEdit
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
             defaultValue={heading ? heading : "Click to Name"}
-            editView={fieldProps => <Textfield {...fieldProps} autoFocus />}
+            editView={(fieldProps) => <Textfield {...fieldProps} autoFocus />}
             readView={() => (
               <ReadViewContainer>
                 {heading || "Click to Name"}
               </ReadViewContainer>
             )}
-            onConfirm={value => {
+            onConfirm={(value) => {
               node.properties.description = value;
               updateName(node.id, value);
             }}

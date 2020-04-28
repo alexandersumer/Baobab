@@ -16,7 +16,7 @@ function QueueKanbanInner(props) {
     withScrollableColumns,
     parentID,
     treeID,
-    loading
+    loading,
   } = props;
 
   const history = useHistory();
@@ -27,11 +27,11 @@ function QueueKanbanInner(props) {
       title: task,
       type: type,
       queueID: parentID,
-      tree: treeID
+      tree: treeID,
     };
 
     let newColumns = {
-      QueueItems: [...columns["QueueItems"], node]
+      QueueItems: [...columns["QueueItems"], node],
     };
 
     const key = "mkey";
@@ -45,7 +45,7 @@ function QueueKanbanInner(props) {
         message.success({ content: "Created!", key, duration: 0.5 });
         console.log("Success");
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         console.log("Not success :( ");
         message.error("Couldn't create queue item: " + error.mesage);
@@ -53,8 +53,8 @@ function QueueKanbanInner(props) {
       });
   };
 
-  const onCardClick = id => {
-    const clickedCard = columns.QueueItems.find(element => element.id === id);
+  const onCardClick = (id) => {
+    const clickedCard = columns.QueueItems.find((element) => element.id === id);
     if (!clickedCard) {
       return;
     }
@@ -103,7 +103,7 @@ export function QueueKanban(props) {
   return (
     <Board
       {...props}
-      ControlledBoard={e => {
+      ControlledBoard={(e) => {
         return QueueKanbanInner(e);
       }}
     ></Board>

@@ -5,8 +5,8 @@ export const CardContainer = styled.div`
   border-radius: ${borderRadius}px;
   border: 2px solid transparent;
   border-color: transparent;
-  background-color: ${props => (props.color ? props.color : "white")};
-  box-shadow: ${props => (props.isDragging ? `2px 2px 1px #A5ADBA` : "none")};
+  background-color: ${(props) => (props.color ? props.color : "white")};
+  box-shadow: ${(props) => (props.isDragging ? `2px 2px 1px #A5ADBA` : "none")};
   box-sizing: border-box;
   padding: ${grid}px;
   min-height: 10px;
@@ -51,8 +51,8 @@ export const CardContent = styled.div`
   overflow-wrap: break-word;
 `;
 
-export const CardFooter = styled.div.attrs(props => ({
-  className: "shadowrealm"
+export const CardFooter = styled.div.attrs((props) => ({
+  className: "shadowrealm",
 }))`
   display: flex;
   margin-top: ${grid}px;

@@ -32,18 +32,18 @@ exports.UpdateTree = functions
     return treeRef
       .update({
         name: data.name,
-        description: data.description || null
+        description: data.description || null,
       })
       .then(() => {
         return treeRef.get();
       })
-      .then(snapshot => {
+      .then((snapshot) => {
         console.log("Successfully updated tree with id: ", treeRef.id);
         return {
-          name: snapshot.get("name")
+          name: snapshot.get("name"),
         };
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Failed to update tree, error: ", error);
         throw new functions.https.HttpsError("unknown", error);
       });

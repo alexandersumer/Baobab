@@ -17,7 +17,7 @@ class Search extends Component {
     trees: [],
     nodes: [],
     kanbanItems: [],
-    loading: true
+    loading: true,
   };
 
   dropdownMenu = () => (
@@ -56,13 +56,13 @@ class Search extends Component {
     firebase
       .getFunctionsInstance()
       .httpsCallable("SearchKanbanItems")()
-      .then(result => {
+      .then((result) => {
         this.setState({
           kanbanItems: result.data.kanbanItems,
-          loading: false
+          loading: false,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         message.error(
           "Failed to search kanban items with error: " + error.message,
           3
@@ -75,13 +75,13 @@ class Search extends Component {
     firebase
       .getFunctionsInstance()
       .httpsCallable("SearchNodes")()
-      .then(result => {
+      .then((result) => {
         this.setState({
           nodes: result.data.nodes,
-          loading: false
+          loading: false,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         message.error("Failed to search nodes with error: " + error.message, 3);
       });
   };
@@ -91,13 +91,13 @@ class Search extends Component {
     firebase
       .getFunctionsInstance()
       .httpsCallable("SearchTrees")()
-      .then(result => {
+      .then((result) => {
         this.setState({
           trees: result.data.trees,
-          loading: false
+          loading: false,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         message.error("Failed to search trees with error: " + error.message, 3);
       });
   };
@@ -110,29 +110,29 @@ class Search extends Component {
 
   onChange(event) {
     this.setState({
-      searchBarText: event.target.value
+      searchBarText: event.target.value,
     });
     this.state.filteredItems = this.getResults();
   }
 
   getResults() {
     if (this.state.searchWhat === "kanbanItems") {
-      this.state.items = this.state.kanbanItems
-      return (this.state.items).filter(i =>
+      this.state.items = this.state.kanbanItems;
+      return this.state.items.filter((i) =>
         i.title.toLowerCase().includes(this.state.searchBarText.toLowerCase())
       );
     } else if (this.state.searchWhat === "nodes") {
-      this.state.items = this.state.nodes
-      return (this.state.items).filter(i =>
+      this.state.items = this.state.nodes;
+      return this.state.items.filter((i) =>
         i.name.toLowerCase().includes(this.state.searchBarText.toLowerCase())
       );
     } else if (this.state.searchWhat === "trees") {
-      this.state.items = this.state.trees
-      return (this.state.items).filter(i =>
+      this.state.items = this.state.trees;
+      return this.state.items.filter((i) =>
         i.name.toLowerCase().includes(this.state.searchBarText.toLowerCase())
       );
     } else {
-      return []
+      return [];
     }
   }
 
@@ -146,7 +146,7 @@ class Search extends Component {
           </a>
         </Dropdown>
 
-        {this.state.searchWhat === "" ? null :
+        {this.state.searchWhat === "" ? null : (
           <Box display="flex" flexDirection="row" alignItems="center" mb={2}>
             <TextField
               style={{ width: "600px" }}
@@ -156,103 +156,91 @@ class Search extends Component {
               onChange={this.onChange.bind(this)}
             />
           </Box>
-        }
+        )}
 
-        {
-          this.state.searchWhat === "" || this.state.searchWhat !== "kanbanItems" ?
-            null :
-            this.state.searchWhat === "kanbanItems" && this.state.searchBarText !== "" && !this.state.loading ?
-              (
-                <QueueAnim className="kanbanItems">
-                  {this.state.filteredItems.map(i => (
-                    <SearchItem
-                      name={i.title}
-                      path={"/kanban/".concat(i.parent)}
-                      iconPath={require("../img/baobab.png")}
-                    />
-                  ))}
-                </QueueAnim>
-              ) :
-              this.state.searchWhat === "kanbanItems" && !this.state.loading ?
-                (
-                  <QueueAnim className="kanbanItems">
-                    {this.state.kanbanItems.map(i => (
-                      <SearchItem
-                        name={i.title}
-                        path={"/kanban/".concat(i.parent)}
-                        iconPath={require("../img/baobab.png")}
-                      />
-                    ))}
-                  </QueueAnim>
-                ) :
-                (
-                  <Skeleton />
-                )
-        }
+        {this.state.searchWhat === "" ||
+        this.state.searchWhat !== "kanbanItems" ? null : this.state
+            .searchWhat === "kanbanItems" &&
+          this.state.searchBarText !== "" &&
+          !this.state.loading ? (
+          <QueueAnim className="kanbanItems">
+            {this.state.filteredItems.map((i) => (
+              <SearchItem
+                name={i.title}
+                path={"/kanban/".concat(i.parent)}
+                iconPath={require("../img/baobab.png")}
+              />
+            ))}
+          </QueueAnim>
+        ) : this.state.searchWhat === "kanbanItems" && !this.state.loading ? (
+          <QueueAnim className="kanbanItems">
+            {this.state.kanbanItems.map((i) => (
+              <SearchItem
+                name={i.title}
+                path={"/kanban/".concat(i.parent)}
+                iconPath={require("../img/baobab.png")}
+              />
+            ))}
+          </QueueAnim>
+        ) : (
+          <Skeleton />
+        )}
 
-        {
-          this.state.searchWhat === "" || this.state.searchWhat !== "nodes" ?
-            null :
-            this.state.searchWhat === "nodes" && this.state.searchBarText !== "" && !this.state.loading ?
-              (
-                <QueueAnim className="nodes">
-                  {this.state.filteredItems.map(i => (
-                    <SearchItem
-                      name={i.name}
-                      path={"/tree/".concat(i.partOf)}
-                      iconPath={require("../img/baobab.png")}
-                    />
-                  ))}
-                </QueueAnim>
-              ) :
-              this.state.searchWhat === "nodes" && !this.state.loading ?
-                (
-                  <QueueAnim className="nodes">
-                    {this.state.nodes.map(i => (
-                      <SearchItem
-                        name={i.name}
-                        path={"/tree/".concat(i.partOf)}
-                        iconPath={require("../img/baobab.png")}
-                      />
-                    ))}
-                  </QueueAnim>
-                ) :
-                (
-                  <Skeleton />
-                )
-        }
+        {this.state.searchWhat === "" ||
+        this.state.searchWhat !== "nodes" ? null : this.state.searchWhat ===
+            "nodes" &&
+          this.state.searchBarText !== "" &&
+          !this.state.loading ? (
+          <QueueAnim className="nodes">
+            {this.state.filteredItems.map((i) => (
+              <SearchItem
+                name={i.name}
+                path={"/tree/".concat(i.partOf)}
+                iconPath={require("../img/baobab.png")}
+              />
+            ))}
+          </QueueAnim>
+        ) : this.state.searchWhat === "nodes" && !this.state.loading ? (
+          <QueueAnim className="nodes">
+            {this.state.nodes.map((i) => (
+              <SearchItem
+                name={i.name}
+                path={"/tree/".concat(i.partOf)}
+                iconPath={require("../img/baobab.png")}
+              />
+            ))}
+          </QueueAnim>
+        ) : (
+          <Skeleton />
+        )}
 
-        {
-          this.state.searchWhat === "" || this.state.searchWhat !== "trees" ?
-            null :
-            this.state.searchWhat === "trees" && this.state.searchBarText !== "" && !this.state.loading ?
-              (
-                <QueueAnim className="trees">
-                  {this.state.filteredItems.map(i => (
-                    <SearchItem
-                      name={i.name}
-                      path={"/tree/".concat(i.rootNode)}
-                      iconPath={require("../img/baobab.png")}
-                    />
-                  ))}
-                </QueueAnim>
-              ) :
-              this.state.searchWhat === "trees" && !this.state.loading ?
-                (
-                  <QueueAnim className="trees">
-                    {this.state.trees.map(i => (
-                      <SearchItem
-                        name={i.name}
-                        path={"/tree/".concat(i.rootNode)}
-                        iconPath={require("../img/baobab.png")}
-                      />
-                    ))}
-                  </QueueAnim>
-                ) :
-                (
-                  <Skeleton />
-                )
-        }
+        {this.state.searchWhat === "" ||
+        this.state.searchWhat !== "trees" ? null : this.state.searchWhat ===
+            "trees" &&
+          this.state.searchBarText !== "" &&
+          !this.state.loading ? (
+          <QueueAnim className="trees">
+            {this.state.filteredItems.map((i) => (
+              <SearchItem
+                name={i.name}
+                path={"/tree/".concat(i.rootNode)}
+                iconPath={require("../img/baobab.png")}
+              />
+            ))}
+          </QueueAnim>
+        ) : this.state.searchWhat === "trees" && !this.state.loading ? (
+          <QueueAnim className="trees">
+            {this.state.trees.map((i) => (
+              <SearchItem
+                name={i.name}
+                path={"/tree/".concat(i.rootNode)}
+                iconPath={require("../img/baobab.png")}
+              />
+            ))}
+          </QueueAnim>
+        ) : (
+          <Skeleton />
+        )}
       </Form>
     );
   }

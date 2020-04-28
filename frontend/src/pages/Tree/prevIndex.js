@@ -8,35 +8,35 @@ const queueData = {
     {
       id: "4",
       title: "hello1",
-      type: "kanban"
+      type: "kanban",
     },
     {
       id: "2",
       title: "trello",
-      type: "nestedTree"
+      type: "nestedTree",
     },
     {
       id: "3",
       title: "hehe xd me",
-      type: "kanban"
+      type: "kanban",
     },
     {
       id: "8",
       title: "hehe xd me",
-      type: "kanban"
+      type: "kanban",
     },
     {
       id: "6",
       title: "hehe xd me",
-      type: "kanban"
-    }
-  ]
+      type: "kanban",
+    },
+  ],
 };
 
 const chartSimple = {
   offset: {
     x: 0,
-    y: 0
+    y: 0,
   },
   nodes: {
     node1: {
@@ -44,62 +44,62 @@ const chartSimple = {
       type: "output-only",
       position: {
         x: 300,
-        y: 100
+        y: 100,
       },
       ports: {
         port1: {
           id: "port1",
           type: "output",
           properties: {
-            value: "yes"
-          }
+            value: "yes",
+          },
         },
         port2: {
           id: "port2",
           type: "output",
           properties: {
-            value: "no"
-          }
-        }
-      }
+            value: "no",
+          },
+        },
+      },
     },
     node2: {
       id: "node2",
       type: "input-output",
       position: {
         x: 300,
-        y: 300
+        y: 300,
       },
       ports: {
         port1: {
           id: "port1",
-          type: "input"
+          type: "input",
         },
         port2: {
           id: "port2",
-          type: "output"
-        }
-      }
-    }
+          type: "output",
+        },
+      },
+    },
   },
   links: {
     link1: {
       id: "link1",
       from: {
         nodeId: "node1",
-        portId: "port2"
+        portId: "port2",
       },
       to: {
         nodeId: "node2",
-        portId: "port1"
-      }
-    }
+        portId: "port1",
+      },
+    },
   },
   selected: {},
-  hovered: {}
+  hovered: {},
 };
 
-const getChartDataStub = id => {
+const getChartDataStub = (id) => {
   return chartSimple;
 };
 
@@ -112,7 +112,7 @@ const Outer = styled.div`
   display: flex;
 `;
 
-const NodeInnerCustom = props => {
+const NodeInnerCustom = (props) => {
   const { node, config } = props;
   if (node.type === "output-only") {
     return (
@@ -146,8 +146,8 @@ export class Tree extends React.Component {
       nodes: {},
       links: {},
       selected: {},
-      hovered: {}
-    }
+      hovered: {},
+    },
   };
 
   // TODO: MOVE THIS TO COMPONENT DID MOUNT/ FIX THE DATA FETCHING
@@ -160,7 +160,7 @@ export class Tree extends React.Component {
       <FlowChartWithState
         initialValue={this.state.chartState}
         Components={{
-          NodeInner: NodeInnerCustom
+          NodeInner: NodeInnerCustom,
         }}
       />
     );

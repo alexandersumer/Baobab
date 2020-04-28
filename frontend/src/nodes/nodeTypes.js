@@ -14,12 +14,12 @@ export const DaddyTreeNode = styled.div`
   padding: 30px;
   text-align: center;
   line-height: 10px;
-  background: ${props => props.config.nodeColour};
+  background: ${(props) => props.config.nodeColour};
   color: #f5f5f5;
   border-radius: 10px;
   transition: box-shadow 100ms ease-in-out;
   &:hover {
-    box-shadow: 0 0px 30px 2px rgba(0,0,0,0.3);
+    box-shadow: 0 0px 30px 2px rgba(0, 0, 0, 0.3);
   }
 `;
 
@@ -30,12 +30,12 @@ export const TreeNode = styled.div`
   padding: 30px;
   text-align: center;
   line-height: 10px;
-  background: ${props => props.config.nodeColour};
+  background: ${(props) => props.config.nodeColour};
   color: #f5f5f5;
   border-radius: 10px;
   transition: box-shadow 100ms ease-in-out;
   &:hover {
-    box-shadow: 0 0px 30px 2px rgba(0,0,0,0.3);
+    box-shadow: 0 0px 30px 2px rgba(0, 0, 0, 0.3);
   }
 `;
 export const QueueHead = styled.div`
@@ -44,12 +44,12 @@ export const QueueHead = styled.div`
   height: 10px;
   padding: 30px;
   text-align: center;
-  background: ${props => props.config.queueColour};
+  background: ${(props) => props.config.queueColour};
   color: #f5f5f5;
   border-radius: 10px;
   transition: box-shadow 100ms ease-in-out;
   &:hover {
-    box-shadow: 0 0px 30px 2px rgba(0,0,0,0.3);
+    box-shadow: 0 0px 30px 2px rgba(0, 0, 0, 0.3);
   }
 `;
 

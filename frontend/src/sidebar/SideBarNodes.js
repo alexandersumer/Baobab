@@ -11,7 +11,7 @@ import QueueNodeImage from "../img/QueueNodeImage.png";
 import XImage from "../img/XImage.png";
 import EditImage from "../img/EditImage.png";
 import BeautifyImage from "../img/tree.svg";
-import toolsImage from "../img/support.png"
+import toolsImage from "../img/support.png";
 
 export const TreeButton = styled.div`
   font-size: 14px;
@@ -97,7 +97,7 @@ export const QueueButton = styled.div`
 export const EditButton = styled.div`
   margin-bottom: 10px;
   font-size: 14px;
-  background: #0375B4;
+  background: #0375b4;
   cursor: move;
   border-radius: 50%;
   height: 30px;
@@ -106,7 +106,7 @@ export const EditButton = styled.div`
   align-items: center;
   text-align: center;
   position: relative;
-  top:10px;
+  top: 10px;
   background-image: url(${toolsImage});
   background-repeat: no-repeat;
   background-size: 55% 55%;

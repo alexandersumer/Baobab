@@ -18,13 +18,13 @@ class BoardNoRouter extends React.Component {
       parentID: props.parentID,
       columns: props.initial,
       tree: props.treeID,
-      loading: true
+      loading: true,
     };
 
     this.reload = this.reload.bind(this);
   }
 
-  onDragEnd = result => {
+  onDragEnd = (result) => {
     // dropped nowhere
     if (!result.destination) {
       return;
@@ -44,7 +44,7 @@ class BoardNoRouter extends React.Component {
     const data = reorderCardMap({
       cardMap: this.state.columns,
       source,
-      destination
+      destination,
     });
 
     this.onColumnChange(data.cardMap, true);
@@ -74,10 +74,10 @@ class BoardNoRouter extends React.Component {
     this.reload();
   }
 
-  reload = (id=null) => {
+  reload = (id = null) => {
     this.props
       .getData(id)
-      .then(data => {
+      .then((data) => {
         var proj;
         var name;
         if (!data) {
@@ -93,10 +93,10 @@ class BoardNoRouter extends React.Component {
           columns: data,
           tree: proj,
           name: name,
-          loading: false
+          loading: false,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         message.error("Failed to load board data. Error: " + error.message);
       });
   };

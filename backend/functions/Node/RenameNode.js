@@ -7,7 +7,7 @@ exports.RenameNode = functions
     if (context.auth === null) {
       throw new functions.https.HttpsError(
         "unauthenticated",
-        "You must be signed in daddy."
+        "You must be signed in."
       );
     }
 
@@ -30,18 +30,18 @@ exports.RenameNode = functions
     // make edits here to the node
     return docRef
       .update({
-        name: data.name
+        name: data.name,
       })
       .then(() => {
         return docRef.get(); // get item from DB
       })
-      .then(item => {
+      .then((item) => {
         return {
           id: item.id,
-          name: item.get("name")
+          name: item.get("name"),
         };
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("Failed to modify a node with error: ", error);
         console.log(error);
         throw error;

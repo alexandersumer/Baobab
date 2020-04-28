@@ -31,8 +31,8 @@ exports.AddConnection = functions
     const tmp = [parent.get(), child.get()];
     // Add child to parent
     return Promise.all(tmp)
-      .then(a => {
-        a.forEach(item => {
+      .then((a) => {
+        a.forEach((item) => {
           if (!item.exists) {
             throw Error("Items doesn't exist");
           }
@@ -44,17 +44,17 @@ exports.AddConnection = functions
           .collection("nodes")
           .doc(data.parent)
           .update({
-            children: firebase.firestore.FieldValue.arrayUnion(child)
+            children: firebase.firestore.FieldValue.arrayUnion(child),
           });
       })
       .then(() => {
         return child.get();
       })
-      .then(childsnapshot => {
+      .then((childsnapshot) => {
         const oldParent = childsnapshot.get("parent");
         if (oldParent) {
           return oldParent.update({
-            children: firebase.firestore.FieldValue.arrayRemove(child)
+            children: firebase.firestore.FieldValue.arrayRemove(child),
           });
         } else {
           return null;
@@ -62,14 +62,14 @@ exports.AddConnection = functions
       })
       .then(() => {
         child.update({
-          parent: parent
+          parent: parent,
         });
         return null;
       })
       .then(() => {
         return {};
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         throw error;
       });

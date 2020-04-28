@@ -7,14 +7,14 @@ import * as firebaseui from "firebaseui";
 import { message } from "antd";
 
 const firebaseConfig = {
-  apiKey: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  apiKey: "AIzaSyDPycHenv2ptI8SCfkak_5wlJoje0JNbRM",
   authDomain: "baobab-82803.firebaseapp.com",
   databaseURL: "https://baobab-82803.firebaseio.com",
   projectId: "baobab-82803",
   storageBucket: "baobab-82803.appspot.com",
   messagingSenderId: "398776449818",
   appId: "1:398776449818:web:a2c72c80432d0e0d9c0aa3",
-  measurementId: "G-7WDBS302GC"
+  measurementId: "G-7WDBS302GC",
 };
 
 class Firebase {
@@ -36,7 +36,7 @@ class Firebase {
       this.messaging = null;
     }
 
-    // // MAKE SURE TO CHANGE THE BELOW TO WHEREVER YOUR CLOUD FUNCTIONS ARE HOSTED
+    // MAKE SURE TO CHANGE THE BELOW TO WHEREVER YOUR CLOUD FUNCTIONS ARE HOSTED
     // if (window.location.hostname === "localhost") {
     //   this.functions.useFunctionsEmulator("http://localhost:5001");
     // }
@@ -49,10 +49,12 @@ class Firebase {
   }
 
   setSignInOnAuthReady_(onReady) {
-    const unsubscribe = this.auth.onAuthStateChanged(user => {
+    const unsubscribe = this.auth.onAuthStateChanged((user) => {
       unsubscribe();
       if (!user)
-        this.doSignInAnonymously().then(credential => onReady(credential.user));
+        this.doSignInAnonymously().then((credential) =>
+          onReady(credential.user)
+        );
       else onReady(user);
     });
   }
@@ -131,7 +133,7 @@ class Firebase {
         if (token) {
           await this.functions.httpsCallable("StoreFCMToken")({
             oldToken: this.messagingToken,
-            newToken: token
+            newToken: token,
           });
           this.messagingToken = token;
         }

@@ -6,7 +6,7 @@ import firebase from "../firebase";
 import { message } from "antd";
 import QueueAnim from "rc-queue-anim";
 
-export const NavigationStack = props => {
+export const NavigationStack = (props) => {
   const [navigationStack, setNavStack] = useState([]);
 
   useEffect(() => {
@@ -14,12 +14,12 @@ export const NavigationStack = props => {
     firebase
       .getFunctionsInstance()
       .httpsCallable("GetPathToNode")({
-        leafNode: pageID
+        leafNode: pageID,
       })
-      .then(result => {
+      .then((result) => {
         setNavStack(result.data.path.reverse());
       })
-      .catch(e => {
+      .catch((e) => {
         console.error(e);
         message.error("Failed to load path to this node", 0.5);
       });
@@ -33,7 +33,7 @@ export const NavigationStack = props => {
           return (
             <div key={item.id + index} style={{ display: "inline-flex" }}>
               <NavigationItem
-                onNavigate={path => {
+                onNavigate={(path) => {
                   props.onNavigate(path);
                 }}
                 title={item.title ? item.title : "Dashboard"}
@@ -66,7 +66,7 @@ const NavigationItemWrapper = styled.div`
   }
 `;
 
-const NavigationItem = props => {
+const NavigationItem = (props) => {
   const { title, type, id, onNavigate } = props;
 
   var path = "/tree/" + id;
@@ -92,7 +92,8 @@ const NavigationItem = props => {
       onClick={() => {
         onNavigate(path);
       }}
-      style={style}cd 
+      style={style}
+      cd
     >
       {title}
     </NavigationItemWrapper>

@@ -4,12 +4,6 @@ import { CardContainer, CardContent } from "./CardCommon";
 import { color, kanbanType, nestedTree } from "./Constants";
 import { DescriptionSnippet } from "./DescriptionIcon";
 
-// Imports for editing
-import InlineEdit from "@atlaskit/inline-edit";
-import styled from "styled-components";
-import Textfield from "@atlaskit/textfield";
-import { ReadViewContainer } from "../nodes/nodeTypes";
-
 export function getStyle(provided, style) {
   if (!style) {
     return provided.draggableProps.style;
@@ -17,7 +11,7 @@ export function getStyle(provided, style) {
 
   return {
     ...provided.draggableProps.style,
-    ...style
+    ...style,
   };
 }
 
@@ -26,13 +20,13 @@ function decideCardType(card) {
     case kanbanType: {
       return {
         backgroundColor: color.QUEUE_KANBAN,
-        color: "white"
+        color: "white",
       };
     }
     case nestedTree: {
       return {
         backgroundColor: color.QUEUE_NESTED,
-        color: "white"
+        color: "white",
       };
     }
     default: {
@@ -76,26 +70,10 @@ export function Card(props) {
       data-testid={data.id}
       data-index={index}
       onClick={() => {
-        // you're fucking me cunt
         if (onCardClick) onCardClick(data.id);
       }}
     >
       <CardContent>
-        {/* <InlineEdit
-          onClick={(e) => e.preventDefault()}
-          defaultValue={heading ? heading : "penis"}
-          editView={fieldProps => <Textfield {...fieldProps} autoFocus />}
-          hideActionButtons={false}
-          readView={() => (
-            <ReadViewContainer>
-              {heading || 'Click to enter value'}
-            </ReadViewContainer>
-          )}
-          onConfirm={value => {
-            data.title = value;
-            //updateName(node.id, value); // currently does not get called, why?
-          }}
-        /> */}
         {data.title}
         <div>
           {hasDescription ? (
@@ -108,14 +86,3 @@ export function Card(props) {
     </CardContainer>
   );
 }
-
-// <Footer>
-// <CardID>id:{data.id}</CardID>
-// </Footer>
-
-/*  Previous
-
-      <CardContent>
-        {data.title}
-      </CardContent> 
-*/

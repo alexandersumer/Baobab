@@ -3,16 +3,16 @@ import { KanbanBoard } from "../../kanban";
 import firebase from "../../firebase";
 import { useHistory } from "react-router-dom";
 
-export const Kanban = props => {
+export const Kanban = (props) => {
   const parentID = props.match.params.parentID;
   const initial = {
     ["Doing"]: [],
     ["Done"]: [],
-    ["ToDo"]: []
+    ["ToDo"]: [],
   };
   const history = useHistory();
 
-  const getData = (dataID=null) => {
+  const getData = (dataID = null) => {
     if (!dataID) {
       dataID = parentID;
     }
@@ -20,14 +20,12 @@ export const Kanban = props => {
       return firebase
         .getFunctionsInstance()
         .httpsCallable("GetKanbanItems")({
-          kanbanID: dataID
+          kanbanID: dataID,
         })
-        .then(result => {
-          console.log(result);
-          //history.push("/kanban/" + parentID);
+        .then((result) => {
           return result.data;
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
           if (error.message.indexOf("6969") !== -1) {
             history.push("/404");
@@ -42,22 +40,22 @@ export const Kanban = props => {
     });
   };
 
-  const reorderBoard = columns => {
-    const todo = columns.ToDo.map(item => item.id);
+  const reorderBoard = (columns) => {
+    const todo = columns.ToDo.map((item) => item.id);
     const doing = columns.Doing.length > 0 ? columns.Doing[0].id : null;
-    const done = columns.Done.map(item => item.id);
+    const done = columns.Done.map((item) => item.id);
     return firebase
       .getFunctionsInstance()
       .httpsCallable("ReorderKanban")({
         kanbanID: parentID,
         toDo: todo,
         doing: doing,
-        done: done
+        done: done,
       })
-      .then(success => {
+      .then((success) => {
         console.log("Succesful reorder");
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   };

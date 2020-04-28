@@ -25,19 +25,19 @@ exports.GetPathToNode = functions
       path.push({
         id: node.id,
         title: nodeData.name,
-        type: nodeData.type
+        type: nodeData.type,
       });
       // Parentless node -> we are at the top
       if (!node.get("parent")) {
         return node
           .get("tree")
           .get()
-          .then(treeDoc => {
+          .then((treeDoc) => {
             const treeData = treeDoc.data();
             if (treeData && treeDoc.get("name")) {
               path.push({
                 treeID: treeDoc.id,
-                treeName: treeDoc.get("name")
+                treeName: treeDoc.get("name"),
               });
             }
             return Promise.resolve(path);
@@ -50,14 +50,14 @@ exports.GetPathToNode = functions
         return node
           .get("parent")
           .get()
-          .then(parentDoc => getParent(path, parentDoc));
+          .then((parentDoc) => getParent(path, parentDoc));
         // Queue -> grab who it is part of
       } else if (node.get("type") === constants.Queue) {
         path[path.length - 1].id = node.get("partOf").id;
         return node
           .get("partOf")
           .get()
-          .then(rootDoc => getParent(path, rootDoc));
+          .then((rootDoc) => getParent(path, rootDoc));
       } else {
         // Should not reach here tbh
         return Promise.resolve(path);
@@ -69,13 +69,13 @@ exports.GetPathToNode = functions
       .collection("nodes")
       .doc(data.leafNode)
       .get()
-      .then(leafNodeDoc => {
+      .then((leafNodeDoc) => {
         return getParent(path, leafNodeDoc);
       })
-      .then(path => {
+      .then((path) => {
         return { path };
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         throw error;
       });

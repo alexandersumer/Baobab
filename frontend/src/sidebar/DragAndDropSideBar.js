@@ -3,9 +3,13 @@ import { REACT_FLOW_CHART } from "@nanway/react-flow-chart";
 
 import { Sidebar } from "./SideBar";
 import { TreeButton, QueueButton, EditButton } from "./SideBarNodes";
-import { DeleteButton, BeautifyTreeButton, DeleteButtonNah } from "./SideBarNodes";
-import Tooltip from 'react-tooltip-lite';
-import '../toolTip/toolTip.css';
+import {
+  DeleteButton,
+  BeautifyTreeButton,
+  DeleteButtonNah,
+} from "./SideBarNodes";
+import Tooltip from "react-tooltip-lite";
+import "../toolTip/toolTip.css";
 import { TreeNode, QueueHead } from "../nodes/nodeTypes";
 //import DefaultModal from "./EditModal";
 
@@ -18,7 +22,7 @@ const TreeNodeTool = ({ type, ports, properties }) => {
     >
       <TreeButton
         draggable={true}
-        onDragStart={event => {
+        onDragStart={(event) => {
           event.dataTransfer.setData(
             REACT_FLOW_CHART,
             JSON.stringify({ type, ports, properties })
@@ -41,7 +45,7 @@ const QueueNodeTool = ({ type, ports, properties }) => {
       <QueueButton
         className="queue"
         draggable={true}
-        onDragStart={event => {
+        onDragStart={(event) => {
           event.dataTransfer.setData(
             REACT_FLOW_CHART,
             JSON.stringify({ type, ports, properties })
@@ -54,7 +58,7 @@ const QueueNodeTool = ({ type, ports, properties }) => {
   );
 };
 
-export const DragAndDropSideBar = props => {
+export const DragAndDropSideBar = (props) => {
   return (
     <Sidebar>
       <TreeNodeTool
@@ -62,16 +66,16 @@ export const DragAndDropSideBar = props => {
         ports={{
           port1: {
             id: "port1",
-            type: "input"
+            type: "input",
           },
           port2: {
             id: "port2",
-            type: "output"
-          }
+            type: "output",
+          },
         }}
         properties={{
           custom: "input-output",
-          description: "Click to Name"
+          description: "Click to Name",
         }}
       />
       <QueueNodeTool
@@ -81,18 +85,18 @@ export const DragAndDropSideBar = props => {
             id: "port1",
             type: "input",
             properties: {
-              custom: "property"
-            }
-          }
+              custom: "property",
+            },
+          },
         }}
         properties={{
           description: "Click to Name",
-          custom: "input-only"
+          custom: "input-only",
         }}
       />
       <React.Fragment>
-        <Tooltip 
-          content="Click to restructure your tree!" 
+        <Tooltip
+          content="Click to restructure your tree!"
           direction="right"
           className="beautifyToolTip"
         >
@@ -104,24 +108,23 @@ export const DragAndDropSideBar = props => {
         </Tooltip>
       </React.Fragment>
       <React.Fragment>
-        <Tooltip 
-          content="Click to customise your Canvas" 
+        <Tooltip
+          content="Click to customise your Canvas"
           direction="right"
-          className="editToolTip">
+          className="editToolTip"
+        >
           <EditButton
             onClick={() => {
-              // ADD SHIT HERE TODO 
               props.onSidebarEdit();
             }}
-          >
-          </EditButton>
+          ></EditButton>
         </Tooltip>
       </React.Fragment>
 
       {props.selected ? (
         <React.Fragment>
-          <Tooltip 
-            content="Delete currently selected node." 
+          <Tooltip
+            content="Delete currently selected node."
             direction="right"
             className="deleteToolTip"
           >
@@ -132,16 +135,17 @@ export const DragAndDropSideBar = props => {
             ></DeleteButton>
           </Tooltip>
         </React.Fragment>
-      ) : 
-      <React.Fragment>
-        <Tooltip 
-          content="Select a node or connection to delete it." 
-          direction="right"
-          className="noSelectDelete">
-          <DeleteButtonNah></DeleteButtonNah>
-        </Tooltip>
-      </React.Fragment>
-      }
+      ) : (
+        <React.Fragment>
+          <Tooltip
+            content="Select a node or connection to delete it."
+            direction="right"
+            className="noSelectDelete"
+          >
+            <DeleteButtonNah></DeleteButtonNah>
+          </Tooltip>
+        </React.Fragment>
+      )}
     </Sidebar>
   );
 };

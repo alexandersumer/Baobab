@@ -33,15 +33,15 @@ exports.DeleteConnection = functions
       .collection("nodes")
       .doc(data.parentID)
       .update({
-        children: firebase.firestore.FieldValue.arrayRemove(childDoc)
+        children: firebase.firestore.FieldValue.arrayRemove(childDoc),
       })
       .then(() => {
         childDoc.update({
-          parent: null
+          parent: null,
         });
         return null;
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         throw error;
       });

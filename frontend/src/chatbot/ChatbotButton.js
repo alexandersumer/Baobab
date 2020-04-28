@@ -16,11 +16,11 @@ class ChatbotButton extends React.Component {
         onClick={this.props.onClick}
       >
         <img className={"minimise-chatbot-icon"} src={closeIcon} />
-        <div class='tooltip'>
-        <img className={"open-chatbot-icon"} src={chatbotIcon} />
-        {!this.props.isOpen &&
-          <span class="tooltiptext"> Talk to Baobot! </span>
-        }
+        <div class="tooltip">
+          <img className={"open-chatbot-icon"} src={chatbotIcon} />
+          {!this.props.isOpen && (
+            <span class="tooltiptext"> Talk to Baobot! </span>
+          )}
         </div>
       </div>
     );

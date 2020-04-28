@@ -22,7 +22,7 @@ class MessageList extends React.Component {
         })}
         <div
           style={{ float: "left", clear: "both" }}
-          ref={el => (this.messagesEnd = el)}
+          ref={(el) => (this.messagesEnd = el)}
         ></div>
       </div>
     );

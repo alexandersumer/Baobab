@@ -32,12 +32,12 @@ exports.ReorderKanban = functions
 
     const lanes = [
       { list: "ToDo", newArr: newToDo, data: data.toDo },
-      { list: "Doing", newArr: newDone, data: data.done }
+      { list: "Doing", newArr: newDone, data: data.done },
     ];
     for (index in lanes) {
       const item = lanes[index];
       if (item.data) {
-        item.data.forEach(refID => {
+        item.data.forEach((refID) => {
           item.newArr.push(firestore.collection("kanbanItems").doc(refID));
         });
       } else {
@@ -51,23 +51,20 @@ exports.ReorderKanban = functions
       .update({
         ToDo: newToDo,
         Doing: newDoing,
-        Done: newDone
+        Done: newDone,
       })
       .then(() => {
         console.log("Reorder successful");
-        return firestore
-          .collection("nodes")
-          .doc(data.kanbanID)
-          .get();
+        return firestore.collection("nodes").doc(data.kanbanID).get();
       })
-      .then(snapshot => {
+      .then((snapshot) => {
         return {
-          ToDo: snapshot.data().ToDo.map(item => item.id),
+          ToDo: snapshot.data().ToDo.map((item) => item.id),
           Doing: snapshot.data().Doing ? snapshot.data().Doing.id : null,
-          Done: snapshot.data().Done.map(item => item.id)
+          Done: snapshot.data().Done.map((item) => item.id),
         };
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
         throw error;
       });

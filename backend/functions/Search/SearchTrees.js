@@ -23,14 +23,14 @@ exports.SearchTrees = functions
       .doc(context.auth.uid)
       .collection("trees")
       .get()
-      .then(snapshot => {
+      .then((snapshot) => {
         let promises = [];
-        snapshot.forEach(doc => {
+        snapshot.forEach((doc) => {
           promises.push(doc.data().treeRef.get());
         });
         return Promise.all(promises);
       })
-      .then(values => {
+      .then((values) => {
         let rootNodePromises = [];
         for (let key in values) {
           let tree = values[key].data();
@@ -42,7 +42,7 @@ exports.SearchTrees = functions
         }
         return Promise.all(rootNodePromises);
       })
-      .then(rootNodes => {
+      .then((rootNodes) => {
         rootNodes.forEach((rootNode, index) => {
           trees[index].rootNode = rootNode.id;
         });
@@ -52,7 +52,7 @@ exports.SearchTrees = functions
         console.log(trees);
         return { trees: trees };
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         throw new functions.https.HttpsError("unknown", error);
       });

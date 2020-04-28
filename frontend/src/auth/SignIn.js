@@ -16,7 +16,7 @@ class SignIn extends Component {
           message.success("Successfully signed in. Redirecting...");
           return true;
         },
-        signInFailure: error => {
+        signInFailure: (error) => {
           if (error.code === "firebaseui/anonymous-upgrade-merge-conflict") {
             const anonUID = firebaseInstance.getCurrentUser().uid;
 
@@ -36,7 +36,7 @@ class SignIn extends Component {
             message.error("Error in signing in: " + error);
           }
         },
-        uiShown: () => {}
+        uiShown: () => {},
       },
 
       signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
@@ -47,7 +47,7 @@ class SignIn extends Component {
 
       signInSuccessUrl: "/dashboard",
 
-      autoUpgradeAnonymousUsers: true
+      autoUpgradeAnonymousUsers: true,
     };
 
     firebaseInstance.authUI.start("#firebaseui-auth-container", uiConfig);

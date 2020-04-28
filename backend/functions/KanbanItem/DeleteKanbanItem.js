@@ -25,7 +25,7 @@ exports.DeleteKanbanItem = functions
         console.log("Deletion of " + data.itemID + " was successful");
         return {};
       })
-      .catch(error => {
+      .catch((error) => {
         throw error;
       });
   });

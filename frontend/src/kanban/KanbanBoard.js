@@ -35,7 +35,7 @@ export function KanbanBoard(props) {
   return (
     <Board
       {...props}
-      ControlledBoard={e => {
+      ControlledBoard={(e) => {
         return KanbanBoardInner(e);
       }}
     ></Board>
@@ -49,7 +49,7 @@ function KanbanBoardInner(props) {
     withScrollableColumns,
     parentID,
     treeID,
-    loading
+    loading,
   } = props;
   console.log(loading);
   const [open, setOpen] = useState(false);
@@ -60,7 +60,7 @@ function KanbanBoardInner(props) {
   };
   const history = useHistory();
 
-  const onCardClick = id => {
+  const onCardClick = (id) => {
     setSelectedCard(id);
     setOpen(true);
   };
@@ -73,20 +73,20 @@ function KanbanBoardInner(props) {
     }
   };
 
-  const findCard = id => {
+  const findCard = (id) => {
     var foundArr = [
-      columns["ToDo"].findIndex(card => {
+      columns["ToDo"].findIndex((card) => {
         return card.id === id;
       }),
-      columns.Doing.findIndex(card => {
+      columns.Doing.findIndex((card) => {
         return card.id === id;
       }),
-      columns.Done.findIndex(card => {
+      columns.Done.findIndex((card) => {
         return card.id === id;
-      })
+      }),
     ];
 
-    const found = foundArr.findIndex(element => {
+    const found = foundArr.findIndex((element) => {
       return element !== -1;
     });
     if (found < 0) {
@@ -97,21 +97,21 @@ function KanbanBoardInner(props) {
     return {
       card: columns[cols[found]][foundArr[found]],
       board: cols[found],
-      indexInArray: foundArr[found]
+      indexInArray: foundArr[found],
     };
   };
 
-  const addNewTask = task => {
+  const addNewTask = (task) => {
     var card = {
       id: uuidv4(),
       title: task,
       description: "",
-      tree: treeID
+      tree: treeID,
     };
 
     const newColumns = {
       ...columns,
-      ["ToDo"]: [...columns["ToDo"], card]
+      ["ToDo"]: [...columns["ToDo"], card],
     };
 
     const key = "mkey";
@@ -123,21 +123,21 @@ function KanbanBoardInner(props) {
         id: card.id,
         title: task,
         kanbanID: parentID,
-        tree: treeID
+        tree: treeID,
       })
       .then(() => {
         onColumnChange(newColumns, true);
         message.success({ content: "Created!", key, duration: 0.5 });
         console.log("Successfully added new task ");
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         message.error("Couldn't add new task: " + error.mesage);
         props.reload();
       });
   };
 
-  const onCardChange = card => {
+  const onCardChange = (card) => {
     const changedCard = findCard(card.id);
     columns[changedCard.board][changedCard.indexInArray] = card;
     onColumnChange(columns);
@@ -147,18 +147,18 @@ function KanbanBoardInner(props) {
       .httpsCallable("ModifyKanbanItem")({
         itemID: card.id,
         title: card.title,
-        description: card.description ? card.description : ""
+        description: card.description ? card.description : "",
       })
-      .then(result => {
+      .then((result) => {
         console.log("Great Success in updating " + card.id);
       })
-      .catch(error => {
+      .catch((error) => {
         message.error("Couldn't modify item: " + error.mesage);
         console.log("Not Great Sucess");
       });
   };
 
-  const onCardDelete = id => {
+  const onCardDelete = (id) => {
     setOpen(false);
     setSelectedCard("");
     const changedCard = findCard(id);
@@ -167,13 +167,13 @@ function KanbanBoardInner(props) {
     return firebase
       .getFunctionsInstance()
       .httpsCallable("DeleteKanbanItem")({
-        itemID: id
+        itemID: id,
       })
-      .then(result => {
+      .then((result) => {
         console.log("Great Success in deleting " + id);
         onColumnChange(columns, true);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("Not Great Delete");
         message.error("Reloading. Couldn't add delete task: " + error.mesage);
         props.reload();
@@ -185,13 +185,13 @@ function KanbanBoardInner(props) {
     firebase
       .getFunctionsInstance()
       .httpsCallable("DeleteNode")({
-        nodeID: parentID
+        nodeID: parentID,
       })
-      .then(data => {
+      .then((data) => {
         console.log(data);
         history.push("/tree/" + data.data.navigateTo);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         console.log("Not success :( ");
         message.error("Couldn't delete board: " + error.mesage);
@@ -201,18 +201,17 @@ function KanbanBoardInner(props) {
   var propsName = props.name;
 
   const onBoardNameChange = (id, name) => {
-    // do shit
     propsName = name;
     return firebase
       .getFunctionsInstance()
       .httpsCallable("RenameNode")({
         name: name,
-        id: id
+        id: id,
       })
-      .then(success => {
+      .then((success) => {
         console.log("Successful rename of Kanban");
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -223,7 +222,7 @@ function KanbanBoardInner(props) {
         style={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "baseLine"
+          alignItems: "baseLine",
         }}
       >
         <Grid>
@@ -231,19 +230,21 @@ function KanbanBoardInner(props) {
           <GridColumn medium={20}>
             <DoingTitle
               style={{
-                width: "535px"
+                width: "535px",
               }}
             >
               <InlineEdit
-                onClick={e => e.stopPropagation()}
+                onClick={(e) => e.stopPropagation()}
                 defaultValue={propsName ? propsName : "Click to Name"}
-                editView={fieldProps => <Textfield {...fieldProps} autoFocus />}
+                editView={(fieldProps) => (
+                  <Textfield {...fieldProps} autoFocus />
+                )}
                 readView={() => (
                   <ReadViewContainer>
                     {propsName || "Click to Name"}
                   </ReadViewContainer>
                 )}
-                onConfirm={value => {
+                onConfirm={(value) => {
                   propsName = value;
                   onBoardNameChange(parentID, propsName);
                 }}
@@ -305,7 +306,7 @@ function KanbanBoardInner(props) {
             onCardClick={onCardClick}
             footer={
               <AddCardFooter
-                onAdd={str => {
+                onAdd={(str) => {
                   addNewTask(str);
                 }}
               ></AddCardFooter>
