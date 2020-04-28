@@ -72,7 +72,7 @@ Ok so now you've made new code changes and you want to deploy them to updated th
 
 First make sure you are in the project root directory.
 
-First you need to login (you must be a firebase admin, to request admin access email Alexander on z5114400@student.unsw.edu.au to request access, please provide your gmail)
+First you need to login.
 
 To log into firebase run: `firebase login` (will ask you for gmail and password)
 
@@ -90,7 +90,7 @@ Run:
 
 Doing this will make changes to the Cloud Functions (if you did change the code)
 
-First you need to login (you must be a firebase admin, to request admin access email Alexander on z5114400@student.unsw.edu.au to request access, please provide your gmail)
+First you need to login (you must be a firebase admin)
 
 Make sure you are in the project root folder then go to the backend folder:
 
