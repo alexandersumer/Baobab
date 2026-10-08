@@ -1,0 +1,110 @@
+[
+  {
+    "title": "Violet Evergarden: The Movie",
+    "year": 2020,
+    "imdb_score": 8.3,
+    "imdb_votes": null,
+    "mal_score": 8.83,
+    "mal_members_or_votes": 337379,
+    "notes": "IMDb: 8.3 on a listing site; a What's on Netflix article cites 8.5. Sources conflict, vote count not seen. MAL: 8.831 per MAL snippet (count garbled, approx 337,379); MyAnimePulse mirror shows 8.83 from 345,777. Primary IMDb/MAL pages were blocked by the egress proxy; values come from search-result snippets."
+  },
+  {
+    "title": "Josee, the Tiger and the Fish",
+    "year": 2020,
+    "imdb_score": 7.6,
+    "imdb_votes": null,
+    "mal_score": 8.38,
+    "mal_members_or_votes": 275839,
+    "notes": "IMDb 7.6 seen on PlayPilot, Prime Video listing and IMDb writer page. A Yidio listing shows 7.6 (11,296) but does not name its source, so the vote count is not used. MAL 8.381 with 275,839 scorers per MAL snippet; MyAnimePulse mirror shows 8.38 from 281,060. MAL manga entry is separate (8.051, 29,182 users) and is not used. Primary pages blocked by egress proxy."
+  },
+  {
+    "title": "I Want to Eat Your Pancreas",
+    "year": 2018,
+    "imdb_score": 8.1,
+    "imdb_votes": null,
+    "mal_score": 8.55,
+    "mal_members_or_votes": 660000,
+    "notes": "IMDb 8.1 agreed by two sources, vote count not seen. A Thai library catalog shows 0/10 (placeholder, ignored). Simkl 8.6 is a Simkl user rating, not IMDb, so not used. MAL 8.551 from a snippet saying more than 660,000 users; the count is a lower bound. MAL title is Kimi no Suizou wo Tabetai. Primary pages blocked by egress proxy."
+  },
+  {
+    "title": "Ride Your Wave",
+    "year": 2019,
+    "imdb_score": 6.9,
+    "imdb_votes": 5388,
+    "mal_score": 7.62,
+    "mal_members_or_votes": 107900,
+    "notes": "IMDb: one listing shows 6.9 with 5.388 votes (read as 5,388); another aggregator shows 6.8, and a third shows 6.9 from only 12 votes. The IMDb value is not confirmed on the IMDb page. MAL 7.62 with about 107,900 users comes from the MyAnimePulse mirror, which credits MAL, not from the MAL page itself. ANN weighted mean 7.592 is not used."
+  },
+  {
+    "title": "Children of the Sea",
+    "year": 2019,
+    "imdb_score": 6.5,
+    "imdb_votes": 4100,
+    "mal_score": 7.2,
+    "mal_members_or_votes": 42487,
+    "notes": "IMDb 6.5 from about 4,100 votes per a search snippet of the IMDb title page; MovieMeter (4,454) and FilmVandaag (4,426) show slightly different counts. MAL 7.201 (MAL title Kaijuu no Kodomo). The MAL snippet's count is garbled; 42,487 users is from the MyAnimePulse mirror, which may be a different capture time. Primary pages blocked by egress proxy."
+  },
+  {
+    "title": "Promare",
+    "year": 2019,
+    "imdb_score": 7.0,
+    "imdb_votes": 6137,
+    "mal_score": 7.88,
+    "mal_members_or_votes": 149287,
+    "notes": "IMDb 7.0 from a university film guide and a film database. Vote count 6,137 from a later snapshot; an earlier snapshot showed 6,101. MAL 7.88 with 149,287 users comes from the MyAnimePulse mirror, which credits MAL, not from the MAL page itself. Primary pages blocked by egress proxy."
+  },
+  {
+    "title": "Made in Abyss: Dawn of the Deep Soul",
+    "year": 2020,
+    "imdb_score": null,
+    "imdb_votes": null,
+    "mal_score": 8.6,
+    "mal_members_or_votes": 299200,
+    "notes": "IMDb not found in results (IMDb page did not appear). Non-IMDb figures seen but not used: Filmaffinity 7.3 (807 votes), TMDB 7.8 (301 votes) via unSUB, Anicove 8.5 (source unnamed). MAL 8.601 on MAL as Made in Abyss Movie 3: Fukaki Tamashii no Reimei; one snapshot shows about 295,500 users and a later one about 299,200. MyAnimePulse mirror shows 8.60 from about 307,000. Primary pages blocked by egress proxy."
+  },
+  {
+    "title": "Cowboy Bebop: The Movie",
+    "year": 2001,
+    "imdb_score": 7.9,
+    "imdb_votes": 28642,
+    "mal_score": 8.38,
+    "mal_members_or_votes": 231391,
+    "notes": "IMDb: 7.9/10 from 28,642 users per one IMDb snapshot in results; a 2021 list also gives 7.9. Also called Knockin' on Heaven's Door. unSUB shows 7.7 from TMDB, which is not IMDb. MAL 8.381 at the MAL page (Tengoku no Tobira) with about 231,391 users per the snippet; MyAnimePulse shows 8.38 from 233,119. Primary pages blocked by egress proxy."
+  },
+  {
+    "title": "Metropolis",
+    "year": 2001,
+    "imdb_score": 7.2,
+    "imdb_votes": 24057,
+    "mal_score": 7.53,
+    "mal_members_or_votes": null,
+    "notes": "IMDb 7.2 with about 24,000 votes (snippet reads 7,2 (24.057)); a streaming aggregator also gives 7.2. A site showing 7.135 from 479 votes looks like TMDB, not IMDb, so not used. MAL 7.531 per the MAL snippet; scored-by count is garbled and not confirmed. Another snapshot shows 7.541. Primary pages blocked by egress proxy."
+  },
+  {
+    "title": "Steamboy",
+    "year": 2004,
+    "imdb_score": 6.8,
+    "imdb_votes": 19814,
+    "mal_score": 7.31,
+    "mal_members_or_votes": null,
+    "notes": "IMDb 6.8 with about 19,814 votes (snippet reads 6,8 (19.814)). Mewayz and unSUB show 6.9 but cite TMDB, not IMDb; Simkl 7.3 is a Simkl user rating, not IMDb. MAL 7.311 per the MAL page snippet, with the vote count garbled so null. MyAnimePulse mirror shows 7.00, which is not used. Primary pages blocked by egress proxy."
+  },
+  {
+    "title": "Vampire Hunter D: Bloodlust",
+    "year": 2000,
+    "imdb_score": 7.7,
+    "imdb_votes": 39000,
+    "mal_score": 7.98,
+    "mal_members_or_votes": 114943,
+    "notes": "IMDb 7.7/10 from one listing (vote count about 39K, read from a listing as roughly 39,000); an older cached IMDb page shows 7.8 from 21,714 users. MAL page is listed as Vampire Hunter D (2000). Latest MAL snapshot shows 7.981 from 114,943 users; an older one showed 7.97 from 111,590. MyAnimePulse mirror shows 7.99 from about 119,339. Primary pages blocked by egress proxy."
+  },
+  {
+    "title": "Colorful",
+    "year": 2010,
+    "imdb_score": null,
+    "imdb_votes": null,
+    "mal_score": 7.74,
+    "mal_members_or_votes": 92901,
+    "notes": "No current IMDb score found. An older Italian listing says IMDb voters gave it 7.3, but it is undated and not used. Non-IMDb figures: Simkl 7.7 from 92,901 votes; ANN weighted mean 7.803; Anime Jepang 7.74. MAL 7.74 with 92,901 users is from a third-party mirror, and the same count is attributed to Simkl, so the source is unclear. Japanese title Karafuru, directed by Keiichi Hara. Primary pages blocked by egress proxy."
+  }
+]
